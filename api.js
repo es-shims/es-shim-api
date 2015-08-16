@@ -5,6 +5,7 @@
 var test = require('tape');
 var path = require('path');
 var fs = require('fs');
+var existsSync = path.existsSync || fs.existsSync;
 
 var args = process.argv.slice(2); // remove node, and script name
 
@@ -19,7 +20,7 @@ var moduleNames = args
 
 if (moduleNames.length < 1) {
 	var packagePath = path.join(process.cwd(), 'package.json');
-	if (!fs.existsSync(packagePath)) {
+	if (!existsSync(packagePath)) {
 		console.error('Error: No package.json found in the current directory');
 		console.error('at least one module name is required when not run in a directory with a package.json');
 		process.exit(1);
