@@ -1,0 +1,71 @@
+{
+	"name": "@es-shims/api",
+	"version": "0.0.0",
+	"author": "Jordan Harband",
+	"description": "Loosely test a package's compliance with the es-shim API",
+	"bin": {
+		"es-shim-api": "api.js"
+	},
+	"license": "MIT",
+	"scripts": {
+		"test": "npm run lint && npm run security",
+		"lint": "npm run jscs && npm run eslint",
+		"jscs": "jscs *.js",
+		"eslint": "eslint *.js",
+		"security": "nsp package"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/es-shims/api.git"
+	},
+	"keywords": [
+		"API",
+		"shim",
+		"polyfill",
+		"ponyfill",
+		"prollyfill",
+		"ES3",
+		"ES5",
+		"ES6",
+		"ES2015",
+		"ES7",
+		"ES2016"
+	],
+	"dependencies": {
+		"tape": "^4.2.0"
+	},
+	"devDependencies": {
+		"jscs": "^2.1.0",
+		"nsp": "^1.0.3",
+		"eslint": "^1.1.0",
+		"@ljharb/eslint-config": "^1.0.4",
+		"make-arrow-function": "^1.0.0",
+		"make-generator-function": "^1.1.0",
+		"semver": "^5.0.1",
+		"replace": "^0.3.0"
+	},
+	"testling": {
+		"files": "test.js",
+		"browsers": [
+			"iexplore/6.0..latest",
+			"firefox/3.0..6.0",
+			"firefox/15.0..latest",
+			"firefox/nightly",
+			"chrome/4.0..10.0",
+			"chrome/20.0..latest",
+			"chrome/canary",
+			"opera/10.0..latest",
+			"opera/next",
+			"safari/4.0..latest",
+			"ipad/6.0..latest",
+			"iphone/6.0..latest",
+			"android-browser/4.2"
+		]
+	},
+	"engines": {
+		"node": ">= 0.4"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
