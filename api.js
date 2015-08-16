@@ -12,9 +12,10 @@ var argEqualsBound = function (arg) { return arg === '--bound'; };
 var not = function (fn) { return function () { return !fn.apply(this, arguments); }; };
 
 var isBound = args.some(argEqualsBound);
-var moduleNames = args.filter(not(argEqualsBound)).map(function (name) {
-	return [name, name];
-});
+var makeEntries = function (name) { return [name, name]; };
+var moduleNames = args
+	.filter(not(argEqualsBound))
+	.map(makeEntries);
 
 if (moduleNames.length < 1) {
 	var packagePath = path.join(process.cwd(), 'package.json');
