@@ -45,7 +45,7 @@ var validateModule = function validateModule(t, name) {
 
 	t.test('export', function (st) {
 		st.equal(typeof module, 'function', 'module is a function');
-		st.test('module is NOT bound (pass `--bound` to skip this test', { skip: isBound }, function (st2) {
+		st.test('module is NOT bound (pass `--bound` to skip this test)', { skip: isBound }, function (st2) {
 			st2.equal(module, implementation, 'module.exports === implementation.js');
 			st2.end();
 		});
