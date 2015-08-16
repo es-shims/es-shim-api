@@ -8,8 +8,6 @@
 
 [![npm badge][11]][1]
 
-[![browser support][9]][10]
-
 ## API Contract
 For any given “es-shim API”-compliant package `foo`, the following invariants must hold:
  - This package will run in an environment supporting the oldest JS version in which the spec’s semantics are achievable - ES3, ES5, and/or ES6. The package should indicate its minimum level of required environment support in its README.
@@ -33,7 +31,7 @@ For any given “es-shim API”-compliant package `foo`, the following invariant
 ## How to denote compliance
 Prominently in the package’s README, please include the following markdown:
 ```md
-This package implements the [es-shim API](https://github/com/es-shims/api) interface. It works in an ES3-supported environment and complies with the [spec](http://www.ecma-international.org/ecma-262/6.0/).
+This package implements the [es-shim API](https://github.com/es-shims/api) interface. It works in an ES3-supported environment and complies with the [spec](http://www.ecma-international.org/ecma-262/6.0/).
 ```
 Please modify “ES3” as needed to the level of support, and please update the spec link so it points directly to the most relevant section of the spec it complies with.
 
@@ -56,12 +54,10 @@ Simply clone the repo, `npm install`, and run `npm test`
 [2]: http://versionbadg.es/es-shims/api.svg
 [3]: https://travis-ci.org/es-shims/es-shim-api.svg
 [4]: https://travis-ci.org/es-shims/es-shim-api
-[5]: https://david-dm.org/es-shims/api.svg
-[6]: https://david-dm.org/es-shims/api
-[7]: https://david-dm.org/es-shims/api/dev-status.svg
-[8]: https://david-dm.org/es-shims/api#info=devDependencies
-[9]: https://ci.testling.com/es-shims/api.png
-[10]: https://ci.testling.com/es-shims/api
+[5]: https://david-dm.org/es-shims/es-shim-api.svg
+[6]: https://david-dm.org/es-shims/es-shim-api
+[7]: https://david-dm.org/es-shims/es-shim-api/dev-status.svg
+[8]: https://david-dm.org/es-shims/es-shim-api#info=devDependencies
 [11]: https://nodei.co/npm/@es-shims/api.png?downloads=true&stars=true
 [license-image]: http://img.shields.io/npm/l/@es-shims/api.svg
 [license-url]: LICENSE
