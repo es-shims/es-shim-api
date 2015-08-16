@@ -4,6 +4,7 @@
 	"extends": "@ljharb",
 
 	"rules": {
+		"max-statements": [2, 15],
 		"no-console": [0],
 		"no-invalid-this": [1],
 		"no-process-exit": [0]

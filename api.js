@@ -30,7 +30,7 @@ if (moduleNames.length < 1) {
 		console.error('Error: No "name" found in package.json');
 		process.exit(2);
 	}
-	moduleNames.push([pkg.name + ' (current directory)', process.cwd()]);
+	moduleNames.push([pkg.name + ' (current directory)', [path.join(process.cwd(), pkg.main || ''), process.cwd()]]);
 }
 var requireOrEvalError = function (name) {
 	try {
@@ -39,11 +39,18 @@ var requireOrEvalError = function (name) {
 		return new EvalError(e.message);
 	}
 };
-var validateModule = function validateModule(t, name) {
+var validateModule = function validateModule(t, nameOrFilePaths) {
+	var name = nameOrFilePaths;
+	var packageDir = nameOrFilePaths;
+	if (Array.isArray(nameOrFilePaths)) {
+		name = nameOrFilePaths[0];
+		packageDir = nameOrFilePaths[1];
+	}
 	var module = requireOrEvalError(name);
-	var implementation = requireOrEvalError(name + '/implementation');
-	var shim = requireOrEvalError(name + '/shim');
-	var getPolyfill = requireOrEvalError(name + '/polyfill');
+	if (module instanceof EvalError) { return module; }
+	var implementation = requireOrEvalError(packageDir + '/implementation');
+	var shim = requireOrEvalError(packageDir + '/shim');
+	var getPolyfill = requireOrEvalError(packageDir + '/polyfill');
 
 	t.test('export', function (st) {
 		st.equal(typeof module, 'function', 'module is a function');
@@ -80,7 +87,7 @@ moduleNames.forEach(function (data) {
 	var name = data[0], filePath = data[1];
 	test('es-shim API : testing module: ' + name, function (t) {
 		t.comment('* ----------------------------- * #');
-		validateModule(t, filePath);
+		t.error(validateModule(t, filePath), 'expected no error');
 		t.end();
 	});
 });
