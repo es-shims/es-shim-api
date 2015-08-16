@@ -1,0 +1,11 @@
+{
+	"root": true,
+
+	"extends": "@ljharb",
+
+	"rules": {
+		"no-console": [0],
+		"no-invalid-this": [1],
+		"no-process-exit": [0]
+	}
+}
