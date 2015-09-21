@@ -8,6 +8,8 @@ This list should ideally be identical to [this list](https://www.npmjs.com/brows
   - `isNaN`: [ES6 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan) | [repo](https://github.com/ljharb/is-nan) | [npm](https://www.npmjs.com/package/is-nan)
  - `Object`
   - `assign`: [ES6 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-object.assign) | [repo](https://github.com/ljharb/object.assign) | [npm](https://www.npmjs.com/package/object.assign)
+  - `entries`: [ES7 proposal](https://github.com/ljharb/proposal-object-values-entries) | [repo](https://github.com/es-shims/Object.entries) | [npm](https://www.npmjs.com/package/object.entries)
+  - `values`: [ES7 proposal](https://github.com/ljharb/proposal-object-values-entries) | [repo](https://github.com/es-shims/Object.values) | [npm](https://www.npmjs.com/package/object.values)
  - `RegExp.prototype`
   - `flags`: [ES6 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-get-regexp.prototype.flags) | [repo](https://github.com/es-shims/RegExp.prototype.flags) | [npm](https://www.npmjs.com/package/regexp.prototype.flags)
  - `String.prototype`
