@@ -13,4 +13,6 @@ This list should ideally be identical to [this list](https://www.npmjs.com/brows
  - `RegExp.prototype`
   - `flags`: [ES6 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-get-regexp.prototype.flags) | [repo](https://github.com/es-shims/RegExp.prototype.flags) | [npm](https://www.npmjs.com/package/regexp.prototype.flags)
  - `String.prototype`
+  - `padLeft`: [ES7 proposal](https://github.com/ljharb/proposal-string-pad-left-right) | [repo](https://github.com/es-shims/String.prototype.padLeft) | [npm](https://www.npmjs.com/package/string.prototype.padleft)
+  - `padRight`: [ES7 proposal](https://github.com/ljharb/proposal-string-pad-left-right) | [repo](https://github.com/es-shims/String.prototype.padRight) | [npm](https://www.npmjs.com/package/string.prototype.padright)
   - `trim`: [ES5 spec](http://www.ecma-international.org/ecma-262/5.1/#sec-15.5.4.20) | [repo](https://github.com/es-shims/String.prototype.trim) | [npm](https://www.npmjs.com/package/string.prototype.trim)
