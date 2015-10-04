@@ -4,6 +4,7 @@
 	"extends": "@ljharb",
 
 	"rules": {
+		"global-require": [1],
 		"max-statements": [2, 15],
 		"no-console": [0],
 		"no-invalid-this": [1],
