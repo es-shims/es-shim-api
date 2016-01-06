@@ -11,7 +11,7 @@
 ## API Contract
 For any given “es-shim API”-compliant package `foo`, the following invariants must hold:
  - This package will run in an environment supporting the oldest JS version in which the spec’s semantics are achievable - ES3, ES5, and/or ES6. The package should indicate its minimum level of required environment support in its README.
- - The package must attempt to support `node`/`io.js`, all versions of all ES3-compliant browers or later, Web Workers, and `node-webkit`. Other environments are a plus, but not expected.
+ - The package must attempt to support `node`/`io.js`, all versions of all ES3-compliant browsers or later, Web Workers, and `node-webkit`. Other environments are a plus, but not expected.
  - `require('foo')` is a spec-compliant JS function. However, if the function’s behavior depends on a receiver (a “this” value), then the first argument to this function will be used as that receiver. The package should indicate if this is the case in its README.
  - `require('foo').implementation` or `require('foo/implementation')` is a spec-compliant JS function, that will depend on a receiver (a “this” value) as the spec requires.
  - `require('foo').getPolyfill` or `require('foo/polyfill')` is a function that when invoked, will return the most compliant and performant function that it can - if a native version is available, and does not violate the spec, then the native function will be returned - otherwise, either the `implementation`, or a custom, wrapped version of the native function, will be returned.
