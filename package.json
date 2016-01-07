@@ -35,10 +35,10 @@
 		"tape": "^4.4.0"
 	},
 	"devDependencies": {
-		"jscs": "^2.6.0",
-		"nsp": "^2.1.0",
+		"jscs": "^2.8.0",
+		"nsp": "^2.2.0",
 		"eslint": "^1.10.3",
-		"@ljharb/eslint-config": "^1.6.0",
+		"@ljharb/eslint-config": "^1.6.1",
 		"make-arrow-function": "^1.1.0",
 		"make-generator-function": "^1.1.0",
 		"semver": "^5.1.0",
