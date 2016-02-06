@@ -35,7 +35,7 @@
 		"tape": "^4.4.0"
 	},
 	"devDependencies": {
-		"jscs": "^2.8.0",
+		"jscs": "^2.9.0",
 		"nsp": "^2.2.0",
 		"eslint": "^1.10.3",
 		"@ljharb/eslint-config": "^1.6.1",
