@@ -1,6 +1,6 @@
 {
 	"name": "@es-shims/api",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": "Jordan Harband",
 	"description": "Loosely test a package's compliance with the es-shim API",
 	"bin": {
