@@ -81,10 +81,13 @@ var validateModule = function validateModule(t, nameOrFilePaths) {
 		}
 		st.end();
 	});
+
+	return void 0;
 };
 
 moduleNames.forEach(function (data) {
-	var name = data[0], filePath = data[1];
+	var name = data[0];
+	var filePath = data[1];
 	test('es-shim API : testing module: ' + name, function (t) {
 		t.comment('* ----------------------------- * #');
 		t.error(validateModule(t, filePath), 'expected no error');
