@@ -36,7 +36,7 @@
 	},
 	"devDependencies": {
 		"jscs": "^2.9.0",
-		"nsp": "^2.2.0",
+		"nsp": "^2.2.2",
 		"eslint": "^2.0.0",
 		"@ljharb/eslint-config": "^2.1.0",
 		"make-arrow-function": "^1.1.0",
