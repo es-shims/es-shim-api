@@ -10,7 +10,11 @@ var existsSync = path.existsSync || fs.existsSync;
 var args = process.argv.slice(2); // remove node, and script name
 
 var argEqualsBound = function (arg) { return arg === '--bound'; };
-var not = function (fn) { return function () { return !fn.apply(this, arguments); }; };
+var not = function (fn) {
+	return function () {
+		return !fn.apply(this, arguments);
+	};
+};
 
 var isBound = args.some(argEqualsBound);
 var makeEntries = function (name) { return [name, name]; };
