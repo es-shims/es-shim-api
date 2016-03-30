@@ -10,6 +10,7 @@ var existsSync = path.existsSync || fs.existsSync;
 var args = process.argv.slice(2); // remove node, and script name
 
 var argEqualsBound = function (arg) { return arg === '--bound'; };
+var argEqualsProperty = function (arg) { return arg === '--property'; };
 var not = function (fn) {
 	return function () {
 		return !fn.apply(this, arguments);
@@ -17,9 +18,11 @@ var not = function (fn) {
 };
 
 var isBound = args.some(argEqualsBound);
+var isProperty = args.some(argEqualsProperty);
 var makeEntries = function (name) { return [name, name]; };
 var moduleNames = args
 	.filter(not(argEqualsBound))
+	.filter(not(argEqualsProperty))
 	.map(makeEntries);
 
 if (moduleNames.length < 1) {
@@ -67,7 +70,11 @@ var validateModule = function validateModule(t, nameOrFilePaths) {
 
 	t.test('implementation', function (st) {
 		st.equal(implementation, module.implementation, 'module.exports.implementaton === implementation.js');
-		st.equal(typeof implementation, 'function', 'implementation is a function');
+		if (isProperty) {
+			st.comment('# SKIP implementation that is a data property need not be a function');
+		} else {
+			st.equal(typeof implementation, 'function', 'implementation is a function');
+		}
 		st.end();
 	});
 
