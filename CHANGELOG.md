@@ -1,3 +1,10 @@
+1.2.0 / 2016-03-29
+==================
+  * [New] Add `--property` to skip check that implementation is a function
+  * [Deps] update `tape`
+  * [Dev Deps] update `jscs`, `nsp`, `eslint`, `@ljharb/eslint-config`
+  * [Tests] up to `node` `v5.9`, `v4.4`
+
 1.1.0 / 2016-02-06
 ==================
   * [New] Require that the default export be `getPolyfill()` instead of `implementation`
