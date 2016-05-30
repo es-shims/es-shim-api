@@ -9,8 +9,12 @@ var existsSync = path.existsSync || fs.existsSync;
 
 var args = process.argv.slice(2); // remove node, and script name
 
-var argEqualsBound = function (arg) { return arg === '--bound'; };
-var argEqualsProperty = function (arg) { return arg === '--property'; };
+var argEqualsBound = function (arg) {
+	return arg === '--bound';
+};
+var argEqualsProperty = function (arg) {
+	return arg === '--property';
+};
 var not = function (fn) {
 	return function () {
 		return !fn.apply(this, arguments);
@@ -19,7 +23,9 @@ var not = function (fn) {
 
 var isBound = args.some(argEqualsBound);
 var isProperty = args.some(argEqualsProperty);
-var makeEntries = function (name) { return [name, name]; };
+var makeEntries = function (name) {
+	return [name, name];
+};
 var moduleNames = args
 	.filter(not(argEqualsBound))
 	.filter(not(argEqualsProperty))
@@ -54,7 +60,9 @@ var validateModule = function validateModule(t, nameOrFilePaths) {
 		packageDir = nameOrFilePaths[1];
 	}
 	var module = requireOrEvalError(name);
-	if (module instanceof EvalError) { return module; }
+	if (module instanceof EvalError) {
+		return module;
+	}
 	var implementation = requireOrEvalError(packageDir + '/implementation');
 	var shim = requireOrEvalError(packageDir + '/shim');
 	var getPolyfill = requireOrEvalError(packageDir + '/polyfill');
