@@ -37,13 +37,13 @@
 		"tape": "^4.6.0"
 	},
 	"devDependencies": {
-		"jscs": "^3.0.5",
+		"jscs": "^3.0.6",
 		"nsp": "^2.5.0",
-		"eslint": "^2.13.1",
-		"@ljharb/eslint-config": "^5.0.0",
+		"eslint": "^3.0.0",
+		"@ljharb/eslint-config": "^6.0.0",
 		"make-arrow-function": "^1.1.0",
 		"make-generator-function": "^1.1.0",
-		"semver": "^5.1.1",
+		"semver": "^5.2.0",
 		"replace": "^0.3.0"
 	},
 	"testling": {
