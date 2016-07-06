@@ -8,9 +8,10 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"test": "npm run --silent lint",
+		"pretest": "npm run --silent lint",
+		"test": "npm run --silent tests-only",
 		"posttest": "npm run --silent security",
-		"tests-only": "npm run --silent lint",
+		"tests-only": "echo 'no tests yet :-('",
 		"lint": "npm run --silent jscs && npm run --silent eslint",
 		"jscs": "jscs *.js",
 		"eslint": "eslint *.js",
