@@ -19,16 +19,16 @@ var not = function (fn) {
 		return !fn.apply(this, arguments);
 	};
 };
+var isArg = function (x) {
+	return x.slice(0, 2) === '--';
+};
 
 var isBound = args.some(argEquals('--bound'));
 var isProperty = args.some(argEquals('--property'));
 var makeEntries = function (name) {
 	return [name, name];
 };
-var moduleNames = args
-	.filter(not(argEquals('--bound')))
-	.filter(not(argEquals('--property')))
-	.map(makeEntries);
+var moduleNames = args.filter(not(isArg)).map(makeEntries);
 
 if (moduleNames.length < 1) {
 	var packagePath = path.join(process.cwd(), 'package.json');
