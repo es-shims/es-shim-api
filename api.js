@@ -9,11 +9,10 @@ var existsSync = path.existsSync || fs.existsSync;
 
 var args = process.argv.slice(2); // remove node, and script name
 
-var argEqualsBound = function (arg) {
-	return arg === '--bound';
-};
-var argEqualsProperty = function (arg) {
-	return arg === '--property';
+var argEquals = function (argName) {
+	return function (arg) {
+		return arg === argName;
+	};
 };
 var not = function (fn) {
 	return function () {
@@ -21,14 +20,14 @@ var not = function (fn) {
 	};
 };
 
-var isBound = args.some(argEqualsBound);
-var isProperty = args.some(argEqualsProperty);
+var isBound = args.some(argEquals('--bound'));
+var isProperty = args.some(argEquals('--property'));
 var makeEntries = function (name) {
 	return [name, name];
 };
 var moduleNames = args
-	.filter(not(argEqualsBound))
-	.filter(not(argEqualsProperty))
+	.filter(not(argEquals('--bound')))
+	.filter(not(argEquals('--property')))
 	.map(makeEntries);
 
 if (moduleNames.length < 1) {
