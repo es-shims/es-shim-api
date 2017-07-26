@@ -38,14 +38,14 @@
 		"tape": "^4.6.0"
 	},
 	"devDependencies": {
+		"@ljharb/eslint-config": "^12.2.0",
+		"eslint": "^4.3.0",
 		"jscs": "^3.0.7",
-		"nsp": "^2.6.1",
-		"eslint": "^3.3.1",
-		"@ljharb/eslint-config": "^7.0.0",
 		"make-arrow-function": "^1.1.0",
 		"make-generator-function": "^1.1.0",
-		"semver": "^5.3.0",
-		"replace": "^0.3.0"
+		"nsp": "^2.6.3",
+		"replace": "^0.3.0",
+		"semver": "^5.4.1"
 	},
 	"testling": {
 		"files": "test.js",

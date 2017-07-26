@@ -52,7 +52,7 @@ var requireOrEvalError = function (name) {
 		return new EvalError(e.message);
 	}
 };
-var validateModule = function validateModule(t, nameOrFilePaths) {
+var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 	var name = nameOrFilePaths;
 	var packageDir = nameOrFilePaths;
 	if (Array.isArray(nameOrFilePaths)) {
