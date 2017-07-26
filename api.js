@@ -80,7 +80,7 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		if (isProperty) {
 			st.comment('# SKIP implementation that is a data property need not be a function');
 		} else {
-			st.equal(typeof implementation, 'function', 'implementation is a function');
+			st.equal(typeof implementation, 'function', 'implementation is a function (pass `--property` to skip this test)');
 		}
 		st.end();
 	});
