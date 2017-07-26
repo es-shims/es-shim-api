@@ -1,3 +1,13 @@
+1.3.0 / 2017-07-26
+==================
+  * [New] add `--skip-shim-returns-polyfill`
+  * [Refactor] ensure `--property` test indicates how to skip it
+  * [Refactor] skip all `--`-prefixed args.
+  * [Refactor] consolidate `argEquals` implementations
+  * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `nsp`, `semver`, `jscs`
+  * [Tests] up to `node` `v8.2`, `v7.10`, `v6.11`, `v4.8`; improve matrix; newer npm breaks on older node
+  * [Docs] Update shims list.
+
 1.2.0 / 2016-03-29
 ==================
   * [New] Add `--property` to skip check that implementation is a function
