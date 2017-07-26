@@ -25,6 +25,7 @@ var isArg = function (x) {
 
 var isBound = args.some(argEquals('--bound'));
 var isProperty = args.some(argEquals('--property'));
+var skipShimPolyfill = args.some(argEquals('--skip-shim-returns-polyfill'));
 var makeEntries = function (name) {
 	return [name, name];
 };
@@ -95,7 +96,12 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		st.equal(shim, module.shim, 'module.exports.shim === shim.js');
 		st.equal(typeof shim, 'function', 'shim is a function');
 		if (typeof shim === 'function') {
-			st.equal(shim(), getPolyfill(), 'shim returns polyfill');
+			var msg = 'shim returns polyfill (pass `--skip-shim-returns-polyfill` to skip this test)';
+			if (skipShimPolyfill) {
+				st.comment('# SKIP ' + msg);
+			} else {
+				st.equal(shim(), getPolyfill(), msg);
+			}
 		}
 		st.end();
 	});
