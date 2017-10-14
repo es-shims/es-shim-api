@@ -26,6 +26,7 @@ var isArg = function (x) {
 var isBound = args.some(argEquals('--bound'));
 var isProperty = args.some(argEquals('--property'));
 var skipShimPolyfill = args.some(argEquals('--skip-shim-returns-polyfill'));
+var skipAutoShim = args.some(argEquals('--skip-auto-shim'));
 var makeEntries = function (name) {
 	return [name, name];
 };
@@ -77,7 +78,7 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 	});
 
 	t.test('implementation', function (st) {
-		st.equal(implementation, module.implementation, 'module.exports.implementaton === implementation.js');
+		st.equal(implementation, module.implementation, 'module.exports.implementation === implementation.js');
 		if (isProperty) {
 			st.comment('# SKIP implementation that is a data property need not be a function');
 		} else {
@@ -102,6 +103,17 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 			} else {
 				st.equal(shim(), getPolyfill(), msg);
 			}
+		}
+		st.end();
+	});
+
+	t.test('auto', function (st) {
+		var msg = 'auto is present';
+		if (skipAutoShim) {
+			st.comment('# SKIP ' + msg);
+		} else {
+			require(packageDir + '/auto');
+			st.comment(msg + ' (pass `--skip-auto-shim` to skip this test)');
 		}
 		st.end();
 	});

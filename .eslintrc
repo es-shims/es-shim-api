@@ -4,10 +4,10 @@
 	"extends": "@ljharb",
 
 	"rules": {
-		"global-require": [1],
-		"max-statements": [2, 16],
-		"no-console": [0],
-		"no-invalid-this": [1],
-		"no-process-exit": [0]
+		"global-require": 1,
+		"max-statements": 0,
+		"no-console": 0,
+		"no-invalid-this": 1,
+		"no-process-exit": 0
 	}
 }

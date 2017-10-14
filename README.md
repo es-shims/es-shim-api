@@ -16,6 +16,7 @@ For any given “es-shim API”-compliant package `foo`, the following invariant
  - `require('foo').implementation` or `require('foo/implementation')` is a spec-compliant JS function, that will depend on a receiver (a “this” value) as the spec requires.
  - `require('foo').getPolyfill` or `require('foo/polyfill')` is a function that when invoked, will return the most compliant and performant function that it can - if a native version is available, and does not violate the spec, then the native function will be returned - otherwise, either the `implementation`, or a custom, wrapped version of the native function, will be returned. This is also the result that will be used as the default export.
  - `require('foo').shim` or `require('foo/shim')` is a function that when invoked, will call `getPolyfill`, and if the polyfill doesn’t match the built-in value, will install it into the global environment.
+ - `require('foo/auto')` will automatically invoke the `shim` method.
  - The only place the package may modify the environment is within its `shim` method.
  - Naturally, `npm test` must run the package’s tests.
  - In every way possible, the package must attempt to make itself robust against the environment being modified *after* it is `require`d.
