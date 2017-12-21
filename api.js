@@ -6,6 +6,7 @@ var test = require('tape');
 var path = require('path');
 var fs = require('fs');
 var existsSync = path.existsSync || fs.existsSync;
+var spawnSync = require('child_process').spawnSync;
 
 var args = process.argv.slice(2); // remove node, and script name
 
@@ -112,8 +113,10 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		if (skipAutoShim) {
 			st.comment('# SKIP ' + msg);
 		} else {
-			require(packageDir + '/auto');
+			require(path.join(packageDir, '/auto'));
 			st.comment(msg + ' (pass `--skip-auto-shim` to skip this test)');
+			var result = spawnSync(path.join(__dirname, './autoTest.js'), [], { stdio: 'inherit' });
+			st.equal(result.status, 0, 'auto invokes shim');
 		}
 		st.end();
 	});
