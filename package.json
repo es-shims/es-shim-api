@@ -39,11 +39,11 @@
 	},
 	"devDependencies": {
 		"@ljharb/eslint-config": "^12.2.1",
-		"eslint": "^4.9.0",
+		"eslint": "^4.13.1",
 		"jscs": "^3.0.7",
 		"make-arrow-function": "^1.1.0",
 		"make-generator-function": "^1.1.0",
-		"nsp": "^2.8.1",
+		"nsp": "^3.1.0",
 		"replace": "^0.3.0",
 		"semver": "^5.4.1"
 	},
