@@ -1,3 +1,9 @@
+2.0.0 / 2017-12-20
+==================
+  * [Breaking] add `auto` requirement (#16)
+  * [Deps] update `tape`
+  * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `nsp`
+
 1.3.0 / 2017-07-26
 ==================
   * [New] add `--skip-shim-returns-polyfill`
