@@ -1,3 +1,7 @@
+2.1.2 / 2017-12-30
+==================
+  * [Fix] ensure the "auto" test works prior to node 0.12
+
 2.1.1 / 2017-12-21
 ==================
   * [Fix] fix new auto test
