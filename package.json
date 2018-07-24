@@ -38,8 +38,8 @@
 		"tape": "^4.8.0"
 	},
 	"devDependencies": {
-		"@ljharb/eslint-config": "^12.2.1",
-		"eslint": "^4.13.1",
+		"@ljharb/eslint-config": "^13.0.0",
+		"eslint": "^5.2.0",
 		"jscs": "^3.0.7",
 		"make-arrow-function": "^1.1.0",
 		"make-generator-function": "^1.1.0",
