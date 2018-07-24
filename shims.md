@@ -1,6 +1,6 @@
 ## Compliant Shims
 
-This list should ideally be identical to [this list](https://www.npmjs.com/browse/keyword/es-shim%20API). Please use pull requests to correct this list, or to add/remove the keyword on appropriate packages.
+This list should ideally be identical to [this list](https://www.npmjs.com/browse/keyword/"es-shim%20API"). Please use pull requests to correct this list, or to add/remove the keyword on appropriate packages.
 
  - `Array.prototype`
   - `includes`: [ES7/ES2016 spec](http://tc39.github.io/ecma262/#sec-array.prototype.includes) | [repo](https://github.com/ljharb/array-includes) | [npm](https://www.npmjs.com/package/array-includes)
