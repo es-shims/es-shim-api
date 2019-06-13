@@ -12,9 +12,7 @@
 		"test": "npm run --silent tests-only",
 		"posttest": "npm run --silent security",
 		"tests-only": "echo 'no tests yet :-('",
-		"lint": "npm run --silent jscs && npm run --silent eslint",
-		"jscs": "jscs *.js",
-		"eslint": "eslint *.js",
+		"lint": "eslint .",
 		"security": "nsp check"
 	},
 	"repository": {
@@ -40,7 +38,6 @@
 	"devDependencies": {
 		"@ljharb/eslint-config": "^13.1.1",
 		"eslint": "^5.16.0",
-		"jscs": "^3.0.7",
 		"make-arrow-function": "^1.1.0",
 		"make-generator-function": "^1.1.0",
 		"nsp": "^3.2.1",
