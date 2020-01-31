@@ -11,6 +11,7 @@
 	},
 	"license": "MIT",
 	"scripts": {
+		"prepublish": "safe-publish-latest",
 		"pretest": "npm run --silent lint",
 		"test": "npm run --silent tests-only",
 		"posttest": "npx aud",
@@ -38,10 +39,11 @@
 		"tape": "^5.0.0-next.4"
 	},
 	"devDependencies": {
-		"@ljharb/eslint-config": "^15.1.0",
+		"@ljharb/eslint-config": "^16.0.0",
 		"eslint": "^6.8.0",
-		"make-arrow-function": "^1.1.0",
-		"make-generator-function": "^1.1.0"
+		"make-arrow-function": "^1.2.0",
+		"make-generator-function": "^2.0.0",
+		"safe-publish-latest": "^1.1.4"
 	},
 	"testling": {
 		"files": "test.js",
