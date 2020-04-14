@@ -2,24 +2,46 @@
 
 This list should ideally be identical to [this list](https://www.npmjs.com/browse/keyword/"es-shim%20API"). Please use pull requests to correct this list, or to add/remove the keyword on appropriate packages.
 
+- `AggregateError`: [proposed spec](https://tc39.es/proposal-promise-any/#sec-aggregate-error-object-structure) | [repo](https://github.com/es-shims/AggregateError) | [npm](https://www.npmjs.com/package/es-aggregate-error)
 - `Array`
-  - `isTemplateObject`: [ES8/ES2017 proposal](https://github.com/tc39/proposal-array-is-template-object) | [repo](https://github.com/mikesamuel/is-template-object) | [npm](https://www.npmjs.com/package/is-template-object)
+  - `isTemplateObject`: [proposed spec](https://tc39.es/proposal-array-is-template-object/) | [repo](https://github.com/tc39/is-template-object) | [npm](https://www.npmjs.com/package/is-template-object)
+  - `of`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-array.of) | [repo](https://github.com/mathiasbynens/Array.of) | [npm](https://www.npmjs.com/package/array.of)
 - `Array.prototype`
-  - `includes`: [ES7/ES2016 spec](http://tc39.github.io/ecma262/#sec-array.prototype.includes) | [repo](https://github.com/ljharb/array-includes) | [npm](https://www.npmjs.com/package/array-includes)
+  - `entries`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-array.prototype.entries) | [repo](https://github.com/es-shims/Array.prototype.entries) | [npm](https://www.npmjs.com/package/array.prototype.entries)
+  - `every`: [ES5 spec](https://tc39.es/ecma262/#sec-array.prototype.every) | [repo](https://github.com/es-shims/Array.prototype.every) | [npm](https://www.npmjs.com/package/array.prototype.every)
+  - `flat`: [ES2019 spec](https://tc39.es/ecma262/#sec-array.prototype.flat) | [repo](https://github.com/es-shims/Array.prototype.flat) | [npm](https://www.npmjs.com/package/array.prototype.flat)
+  - `flatMap`: [ES2019 spec](https://tc39.es/ecma262/#sec-array.prototype.flatmap) | [repo](https://github.com/es-shims/Array.prototype.flatMap) | [npm](https://www.npmjs.com/package/array.prototype.flatmap)
+  - `includes`: [ES7/ES2016 spec](https://tc39.es/ecma262/#sec-array.prototype.includes) | [repo](https://github.com/ljharb/array-includes) | [npm](https://www.npmjs.com/package/array-includes)
+  - `indexOf`: [ES5 spec](https://tc39.es/ecma262/#sec-array.prototype.indexof) | [repo](https://github.com/es-shims/Array.prototype.indexOf) | [npm](https://www.npmjs.com/package/array.prototype.indexof)
+  - `keys`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-array.prototype.keys) | [repo](https://github.com/es-shims/Array.prototype.keys) | [npm](https://www.npmjs.com/package/array.prototype.keys)
+  - `lastIndexOf`: [ES5 spec](https://tc39.es/ecma262/#sec-array.prototype.lastindexof) | [repo](https://github.com/es-shims/Array.prototype.lastIndexOf) | [npm](https://www.npmjs.com/package/array.prototype.lastindexof)
+  - `map`: [ES5 spec](https://tc39.es/ecma262/#sec-array.prototype.map) | [repo](https://github.com/es-shims/Array.prototype.map) | [npm](https://www.npmjs.com/package/array.prototype.map)
+  - `reduce`: [ES5 spec](https://tc39.es/ecma262/#sec-array.prototype.reduce) | [repo](https://github.com/es-shims/Array.prototype.reduce) | [npm](https://www.npmjs.com/package/array.prototype.reduce)
+  - `reduceRight`: [ES5 spec](https://tc39.es/ecma262/#sec-array.prototype.reduceright) | [repo](https://github.com/es-shims/Array.prototype.reduceRight) | [npm](https://www.npmjs.com/package/array.prototype.reduceright)
+  - `some`: [ES5 spec](https://tc39.es/ecma262/#sec-array.prototype.some) | [repo](https://github.com/es-shims/Array.prototype.some) | [npm](https://www.npmjs.com/package/array.prototype.some)
+  - `values`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-array.prototype.values) | [repo](https://github.com/es-shims/Array.prototype.values) | [npm](https://www.npmjs.com/package/array.prototype.values)
 - `Function.prototype`
-  - `name`: [ES6/ES2015 spec](https://tc39.github.io/ecma262/#sec-built-in-function-objects) | [repo](https://github.com/ljharb/function.prototype.name) | [npm](https://www.npmjs.com/package/function.prototype.name)
+  - `name`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-built-in-function-objects) | [repo](https://github.com/ljharb/function.prototype.name) | [npm](https://www.npmjs.com/package/function.prototype.name)
+- `globalThis`: [ES2020 spec](https://tc39.es/ecma262/#sec-globalthis) | [repo](https://github.com/es-shims/globalThis) | [npm](https://www.npmjs.com/package/globalthis)
 - `Number`
-  - `isNaN`: [ES6/ES2015 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-number.isnan) | [repo](https://github.com/ljharb/is-nan) | [npm](https://www.npmjs.com/package/is-nan)
+  - `isNaN`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-number.isnan) | [repo](https://github.com/ljharb/is-nan) | [npm](https://www.npmjs.com/package/is-nan)
 - `Object`
-  - `assign`: [ES6/ES2015 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-object.assign) | [repo](https://github.com/ljharb/object.assign) | [npm](https://www.npmjs.com/package/object.assign)
-  - `entries`: [ES8/ES2017 proposal](https://github.com/ljharb/proposal-object-values-entries) | [repo](https://github.com/es-shims/Object.entries) | [npm](https://www.npmjs.com/package/object.entries)
-  - `getOwnPropertyDescriptors`: [ES8/ES2017 proposal](https://github.com/tc39/proposal-object-getownpropertydescriptors) | [repo](https://github.com/ljharb/object.getownpropertydescriptors) | [npm](https://www.npmjs.com/package/object.getownpropertydescriptors)
-  - `values`: [ES8/ES2017 proposal](https://github.com/ljharb/proposal-object-values-entries) | [repo](https://github.com/es-shims/Object.values) | [npm](https://www.npmjs.com/package/object.values)
+  - `assign`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-object.assign) | [repo](https://github.com/ljharb/object.assign) | [npm](https://www.npmjs.com/package/object.assign)
+  - `entries`: [ES2017 spec](https://tc39.es/ecma262/#sec-object.values) | [repo](https://github.com/es-shims/Object.entries) | [npm](https://www.npmjs.com/package/object.entries)
+  - `fromEntries`: [ES2019 spec](https://tc39.es/ecma262/#sec-object.fromentries) | [repo](https://github.com/es-shims/Object.fromEntries) | [npm](https://www.npmjs.com/package/object.fromentries)
+  - `getOwnPropertyDescriptors`: [ES2017 spec](https://tc39.es/ecma262/#sec-object.getownpropertydescriptors) | [repo](https://github.com/es-shims/object.getownpropertydescriptors) | [npm](https://www.npmjs.com/package/object.getownpropertydescriptors)
+  - `values`: [ES2017 spec](https://tc39.es/ecma262/#sec-object.values) | [repo](https://github.com/es-shims/Object.values) | [npm](https://www.npmjs.com/package/object.values)
+- `Promise`
+  - `try`: [proposed spec](https://tc39.es/proposal-promise-try) | [repo](https://github.com/es-shims/Promise.try) | [npm](https://www.npmjs.com/package/promise.try)
 - `Promise.prototype`
-  - `finally`: [ES8/ES2017 proposal](https://github.com/tc39/proposal-promise-finally) | [repo](https://github.com/es-shims/Promise.prototype.finally) | [npm](https://www.npmjs.com/package/promise.prototype.finally)
+  - `finally`: [ES2018 spec](https://tc39.es/ecma262/#sec-promise.prototype.finally) | [repo](https://github.com/es-shims/Promise.prototype.finally) | [npm](https://www.npmjs.com/package/promise.prototype.finally)
+- `Reflect`
+  - `ownKeys`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-reflect.ownkeys) | [repo](https://github.com/es-shims/Reflect.ownKeys) | [npm](https://www.npmjs.com/package/reflect.ownkeys)
 - `RegExp.prototype`
-  - `flags`: [ES6/ES2015 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-get-regexp.prototype.flags) | [repo](https://github.com/es-shims/RegExp.prototype.flags) | [npm](https://www.npmjs.com/package/regexp.prototype.flags)
+  - `flags`: [ES6/ES2015 spec](https://tc39.es/ecma262/#sec-get-regexp.prototype.flags) | [repo](https://github.com/es-shims/RegExp.prototype.flags) | [npm](https://www.npmjs.com/package/regexp.prototype.flags)
 - `String.prototype`
-  - `padStart`: [ES8/ES2017 proposal](https://github.com/tc39/proposal-string-pad-start-end) | [repo](https://github.com/es-shims/String.prototype.padStart) | [npm](https://www.npmjs.com/package/string.prototype.padstart)
-  - `padEnd`: [ES8/ES2017 proposal](https://github.com/tc39/proposal-string-pad-start-end/) | [repo](https://github.com/es-shims/String.prototype.padEnd) | [npm](https://www.npmjs.com/package/string.prototype.padend)
-  - `trim`: [ES5 spec](http://www.ecma-international.org/ecma-262/5.1/#sec-15.5.4.20) | [repo](https://github.com/es-shims/String.prototype.trim) | [npm](https://www.npmjs.com/package/string.prototype.trim)
+  - `padStart`: [ES2017 spec](https://tc39.es/ecma262/#sec-string.prototype.padstart) | [repo](https://github.com/es-shims/String.prototype.padStart) | [npm](https://www.npmjs.com/package/string.prototype.padstart)
+  - `padEnd`: [ES2017 spec](https://tc39.es/ecma262/#sec-string.prototype.padend) | [repo](https://github.com/es-shims/String.prototype.padEnd) | [npm](https://www.npmjs.com/package/string.prototype.padend)
+  - `trim`: [ES5 spec](https://tc39.es/ecma262/#sec-string.prototype.trim) | [repo](https://github.com/es-shims/String.prototype.trim) | [npm](https://www.npmjs.com/package/string.prototype.trim)
+  - `trimLeft`: [ES2019 spec](https://tc39.es/ecma262/#String.prototype.trimleft) | [repo](https://github.com/es-shims/String.prototype.trimLeft) | [npm](https://www.npmjs.com/package/string.prototype.trimleft)
+  - `trimRight`: [ES2019 spec](https://tc39.es/ecma262/#String.prototype.trimright) | [repo](https://github.com/es-shims/String.prototype.trimRight) | [npm](https://www.npmjs.com/package/string.prototype.trimright)
