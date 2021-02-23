@@ -1,6 +1,5 @@
 # es-shim API <sup>[![Version Badge][2]][1]</sup>
 
-[![Build Status][3]][4]
 [![dependency status][5]][6]
 [![dev dependency status][7]][8]
 [![License][license-image]][license-url]
@@ -32,7 +31,7 @@ For any given “es-shim API”-compliant package `foo`, the following invariant
 ## How to denote compliance
 Prominently in the package’s README, please include the following markdown:
 ```md
-This package implements the [es-shim API](https://github.com/es-shims/api) interface. It works in an ES3-supported environment and complies with the [spec](http://www.ecma-international.org/ecma-262/6.0/).
+This package implements the [es-shim API](https://github.com/es-shims/api) interface. It works in an ES3-supported environment and complies with the [spec](https://www.ecma-international.org/ecma-262/6.0/).
 ```
 Please modify “ES3” as needed to the level of support, and please update the spec link so it points directly to the most relevant section of the spec it complies with.
 
@@ -52,18 +51,16 @@ es-shim-api array-includes --bound
 Simply clone the repo, `npm install`, and run `npm test`
 
 [1]: https://npmjs.org/package/@es-shims/api
-[2]: http://versionbadg.es/es-shims/api.svg
-[3]: https://travis-ci.org/es-shims/es-shim-api.svg
-[4]: https://travis-ci.org/es-shims/es-shim-api
+[2]: https://versionbadg.es/es-shims/api.svg
 [5]: https://david-dm.org/es-shims/es-shim-api.svg
 [6]: https://david-dm.org/es-shims/es-shim-api
 [7]: https://david-dm.org/es-shims/es-shim-api/dev-status.svg
 [8]: https://david-dm.org/es-shims/es-shim-api#info=devDependencies
 [11]: https://nodei.co/npm/@es-shims/api.png?downloads=true&stars=true
-[license-image]: http://img.shields.io/npm/l/@es-shims/api.svg
+[license-image]: https://img.shields.io/npm/l/@es-shims/api.svg
 [license-url]: LICENSE
-[downloads-image]: http://img.shields.io/npm/dm/@es-shims/api.svg
-[downloads-url]: http://npm-stat.com/charts.html?package=@es-shims/api
+[downloads-image]: https://img.shields.io/npm/dm/@es-shims/api.svg
+[downloads-url]: https://npm-stat.com/charts.html?package=@es-shims/api
 [es-abstract-url]: https://npmjs.com/package/es-abstract
 [define-properties-url]: https://npmjs.com/package/define-properties
 [function-bind-url]: https://npmjs.com/package/function-bind
