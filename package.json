@@ -36,7 +36,7 @@
 		"ES2016"
 	],
 	"dependencies": {
-		"tape": "^5.0.1"
+		"tape": "^5.2.0"
 	},
 	"devDependencies": {
 		"@ljharb/eslint-config": "^17.5.1",
