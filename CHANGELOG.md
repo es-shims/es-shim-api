@@ -1,3 +1,23 @@
+2.2.0 / 2021-09-02
+==================
+  * [New] add `--multi`, to support one package containing multiple shims
+  * [readme] add github actions/codecov badges; update URLs
+  * [readme] remove travis badge
+  * [Docs] update shims list
+  * [shims] Adds `Array.isTemplateObject` (#17)
+  * [meta] remove unused Makefile and associated utilities
+  * [meta] add `funding` field
+  * [meta] do not publish github action workflow files
+  * [meta] Quote keyword in npm search link, due to a bug in npmjs.com
+  * [actions] update workflows
+  * [actions] add "Allow Edits" workflow
+  * [actions] switch Automatic Rebase workflow to `pull_request_target` event
+  * [actions] add automatic rebasing / merge commit blocking
+  * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `make-arrow-function`, `make-generator-function`; add `safe-publish-latest`
+  * [Tests] migrate tests to Github Actions
+  * [Tests] use `npx aud` instead of `nsp` or `npm audit` with hoops
+  * [Tests] remove `jscs`
+
 2.1.2 / 2017-12-30
 ==================
   * [Fix] ensure the "auto" test works prior to node 0.12
