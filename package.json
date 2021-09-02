@@ -38,7 +38,7 @@
 	"dependencies": {
 		"call-bind": "^1.0.2",
 		"es-abstract": "^1.18.5",
-		"tape": "^5.2.0"
+		"tape": "^5.3.1"
 	},
 	"devDependencies": {
 		"@ljharb/eslint-config": "^18.0.0",
