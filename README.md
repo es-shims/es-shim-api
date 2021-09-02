@@ -20,12 +20,19 @@ For any given “es-shim API”-compliant package `foo`, the following invariant
  - Naturally, `npm test` must run the package’s tests.
  - In every way possible, the package must attempt to make itself robust against the environment being modified *after* it is `require`d.
   - For example, `require('foo'); delete Function.prototype.call;` must not alter the behavior of `foo`.
-  - The most useful technique for this is shown in this example: `var bind = require('function-bind'); var slice = bind.call(Function.call, Array.prototype.slice); slice([1], 1);` — this technique works in ES3 environments, and will ensure that modifying `Array.prototype` will not interfere with the package.
+  - The most useful technique for this is shown in this example: `var callBound = require('call-bind/callBound'); var slice = callBound('Array.prototype.slice'); slice([1], 1);` — this technique works in ES3 environments, and will ensure that modifying `Array.prototype` or `Function.prototype` will not interfere with the package.
+
+## Multi-shim Packages
+If your package contains multiple shims, you can pass `--multi` to apply these invariants:
+ - The package's main export must be an array of directory names, with no additional properties.
+ - The entry points and respective invariants listed above apply to the subdirectories listed in the main export
+ - The root must contain `shim` and `auto` entrypoints that match the same invariants described above. The `shim` entry point must invoke the `shim` entry point in each of the subdirectories listed in the main export
+ - The root must NOT contain an `implementation` entry point.
 
 ## Recommended dependencies
  - Please use the [es-abstract][es-abstract-url] module to ensure spec-compliant behavior via the spec’s internal abstract operations.
  - Please use the [define-properties][define-properties-url] module to trivially define non-enumerable properties, where supported.
- - Please use the [function-bind][function-bind-url] module to cache references to all builtin methods, to be robust against later modification of the environment.
+ - Please use the [call-bind][call-bind-url] module to cache references to all builtin methods, to be robust against later modification of the environment.
 
 
 ## How to denote compliance
@@ -63,4 +70,4 @@ Simply clone the repo, `npm install`, and run `npm test`
 [downloads-url]: https://npm-stat.com/charts.html?package=@es-shims/api
 [es-abstract-url]: https://npmjs.com/package/es-abstract
 [define-properties-url]: https://npmjs.com/package/define-properties
-[function-bind-url]: https://npmjs.com/package/function-bind
+[call-bind-url]: https://npmjs.com/package/call-bind

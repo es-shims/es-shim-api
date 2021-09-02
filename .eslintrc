@@ -5,10 +5,12 @@
 
 	"rules": {
 		"global-require": 1,
-		"max-lines-per-function": [2, 72],
+		"max-lines-per-function": 0,
+		"max-params": 0,
 		"max-statements": 0,
 		"no-console": 0,
 		"no-invalid-this": 1,
-		"no-process-exit": 0
-	}
+		"no-process-exit": 0,
+		"operator-linebreak": ["error", "before"],
+	},
 }
