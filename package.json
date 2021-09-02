@@ -41,9 +41,9 @@
 		"tape": "^5.2.0"
 	},
 	"devDependencies": {
-		"@ljharb/eslint-config": "^17.5.1",
-		"aud": "^1.1.4",
-		"eslint": "^7.20.0",
+		"@ljharb/eslint-config": "^18.0.0",
+		"aud": "^1.1.5",
+		"eslint": "^7.32.0",
 		"make-arrow-function": "^1.2.0",
 		"make-generator-function": "^2.0.0",
 		"safe-publish-latest": "^1.1.4"
