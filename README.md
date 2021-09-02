@@ -1,11 +1,13 @@
-# es-shim API <sup>[![Version Badge][2]][1]</sup>
+# es-shim API <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
-[![dependency status][5]][6]
-[![dev dependency status][7]][8]
+[![github actions][actions-image]][actions-url]
+[![coverage][codecov-image]][codecov-url]
+[![dependency status][deps-svg]][deps-url]
+[![dev dependency status][dev-deps-svg]][dev-deps-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
-[![npm badge][11]][1]
+[![npm badge][npm-badge-png]][package-url]
 
 ## API Contract
 For any given “es-shim API”-compliant package `foo`, the following invariants must hold:
@@ -57,17 +59,21 @@ es-shim-api array-includes --bound
 ## Tests
 Simply clone the repo, `npm install`, and run `npm test`
 
-[1]: https://npmjs.org/package/@es-shims/api
-[2]: https://versionbadg.es/es-shims/api.svg
-[5]: https://david-dm.org/es-shims/es-shim-api.svg
-[6]: https://david-dm.org/es-shims/es-shim-api
-[7]: https://david-dm.org/es-shims/es-shim-api/dev-status.svg
-[8]: https://david-dm.org/es-shims/es-shim-api#info=devDependencies
-[11]: https://nodei.co/npm/@es-shims/api.png?downloads=true&stars=true
-[license-image]: https://img.shields.io/npm/l/@es-shims/api.svg
+[package-url]: https://npmjs.org/package/number.parseint
+[npm-version-svg]: https://versionbadg.es/es-shims/Number.parseInt.svg
+[deps-svg]: https://david-dm.org/es-shims/Number.parseInt.svg
+[deps-url]: https://david-dm.org/es-shims/Number.parseInt
+[dev-deps-svg]: https://david-dm.org/es-shims/Number.parseInt/dev-status.svg
+[dev-deps-url]: https://david-dm.org/es-shims/Number.parseInt#info=devDependencies
+[npm-badge-png]: https://nodei.co/npm/number.parseint.png?downloads=true&stars=true
+[license-image]: https://img.shields.io/npm/l/number.parseint.svg
 [license-url]: LICENSE
-[downloads-image]: https://img.shields.io/npm/dm/@es-shims/api.svg
-[downloads-url]: https://npm-stat.com/charts.html?package=@es-shims/api
+[downloads-image]: https://img.shields.io/npm/dm/number.parseint.svg
+[downloads-url]: https://npm-stat.com/charts.html?package=number.parseint
+[codecov-image]: https://codecov.io/gh/es-shims/Number.parseInt/branch/main/graphs/badge.svg
+[codecov-url]: https://app.codecov.io/gh/es-shims/Number.parseInt/
+[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/es-shims/Number.parseInt
+[actions-url]: https://github.com/es-shims/Number.parseInt/actions
 [es-abstract-url]: https://npmjs.com/package/es-abstract
 [define-properties-url]: https://npmjs.com/package/define-properties
 [call-bind-url]: https://npmjs.com/package/call-bind
