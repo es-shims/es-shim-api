@@ -1,3 +1,8 @@
+2.2.1 / 2021-09-02
+==================
+  * [Fix] `--multi`: test subpackages’ `auto` endpoint
+  * [Fix] `--multi`: skip `coverage` directory
+
 2.2.0 / 2021-09-02
 ==================
   * [New] add `--multi`, to support one package containing multiple shims
