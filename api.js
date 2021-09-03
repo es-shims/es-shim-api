@@ -163,6 +163,7 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		var dirs = fs.readdirSync(packageDir).filter(function (d) {
 			return !d.startsWith('.')
 				&& d !== 'node_modules'
+				&& d !== 'coverage'
 				&& d !== 'helpers'
 				&& d !== 'test'
 				&& fs.statSync(d).isDirectory();
