@@ -23,12 +23,16 @@ console.log('## Requiring root ' + autoPath + '...');
 
 require(autoPath);
 
+subPackages.forEach(function (subPackage) {
+	require(path.join(process.cwd(), subPackage, 'auto'));
+});
+
 console.log('## shims were called ' + fakeShim.calls.length + ' times');
 
-assert.equal(fakeShim.calls.length, subPackages.length, 'shim was called once per sub-package');
+assert.equal(fakeShim.calls.length, subPackages.length * 2, 'shim was called twice per sub-package');
 var expectedCalls = subPackages.map(function () {
 	return [undefined, []];
 });
-assert.deepEqual(fakeShim.calls, expectedCalls, 'all shims were invoked with no receiver or arguments');
+assert.deepEqual(fakeShim.calls, expectedCalls.concat(expectedCalls), 'all shims were invoked with no receiver or arguments');
 
 console.log('## all shims were invoked with no receiver or arguments');
