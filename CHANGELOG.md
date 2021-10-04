@@ -1,3 +1,7 @@
+2.2.2 / 2021-10-03
+==================
+  * [Deps] remove unused deps
+
 2.2.1 / 2021-09-02
 ==================
   * [Fix] `--multi`: test subpackages’ `auto` endpoint
