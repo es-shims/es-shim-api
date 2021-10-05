@@ -152,6 +152,7 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		if (subPackages instanceof EvalError) {
 			return subPackages;
 		}
+		subPackages.sort();
 		t.ok(Array.isArray(subPackages), 'main export is an array of sub packages');
 		t.deepEqual(
 			Object.keys(subPackages),
