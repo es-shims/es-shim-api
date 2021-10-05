@@ -1,3 +1,7 @@
+2.2.3 / 2021-10-04
+==================
+  * [Fix] `multi`: sort package list before comparing
+
 2.2.2 / 2021-10-03
 ==================
   * [Deps] remove unused deps
