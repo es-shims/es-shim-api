@@ -39,12 +39,12 @@
 		"tape": "^5.3.2"
 	},
 	"devDependencies": {
-		"@ljharb/eslint-config": "^18.0.0",
+		"@ljharb/eslint-config": "^19.1.0",
 		"aud": "^1.1.5",
-		"eslint": "^7.32.0",
+		"eslint": "^8.4.0",
 		"make-arrow-function": "^1.2.0",
 		"make-generator-function": "^2.0.0",
-		"safe-publish-latest": "^1.1.4"
+		"safe-publish-latest": "^2.0.0"
 	},
 	"testling": {
 		"files": "test.js",
