@@ -38,7 +38,7 @@
 		"ES2016"
 	],
 	"dependencies": {
-		"tape": "^5.3.2"
+		"tape": "^5.6.1"
 	},
 	"devDependencies": {
 		"@ljharb/eslint-config": "^21.0.0",
@@ -70,9 +70,6 @@
 	},
 	"engines": {
 		"node": ">= 0.4"
-	},
-	"publishConfig": {
-		"access": "public"
 	},
 	"publishConfig": {
 		"ignore": [
