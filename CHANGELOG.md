@@ -1,3 +1,12 @@
+2.3.0 / 2023-02-04
+==================
+  * [New] add `--ignore-dirs` option to be used with `--multi`
+  * [Deps] update `tape`
+  * [meta] use `npmignore` to autogenerate an npmignore file
+  * [Dev Deps] update `eslint`, `@ljharb/eslint-config`, `aud`, `safe-publish-latest
+  * [actions] update rebase action to use reusable workflow
+  * [actions] reuse common workflows
+
 2.2.3 / 2021-10-04
 ==================
   * [Fix] `multi`: sort package list before comparing
