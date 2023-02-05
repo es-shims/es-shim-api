@@ -8,6 +8,8 @@ var fs = require('fs');
 var existsSync = path.existsSync || fs.existsSync;
 var spawn = require('child_process').spawn;
 
+var flatMap = require('array.prototype.flatmap');
+
 var args = process.argv.slice(2); // remove node, and script name
 
 var argEquals = function (argName) {
@@ -29,6 +31,11 @@ var isProperty = args.some(argEquals('--property'));
 var skipShimPolyfill = args.some(argEquals('--skip-shim-returns-polyfill'));
 var skipAutoShim = args.some(argEquals('--skip-auto-shim'));
 var isMulti = args.some(argEquals('--multi'));
+var extraIgnoreDirs = flatMap(args, function (x) {
+	return x.startsWith('--ignore-dirs=') ? x.slice('--ignore-dirs='.length).split(',') : [];
+});
+
+var ignoreDirs = ['node_modules', 'coverage', 'helpers', 'test', 'aos'].concat(extraIgnoreDirs);
 
 var makeEntries = function (name) {
 	return [name, name];
@@ -162,12 +169,7 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		t.ok(subPackages.length > 0, 'array is not empty');
 
 		var dirs = fs.readdirSync(packageDir).filter(function (d) {
-			return !d.startsWith('.')
-				&& d !== 'node_modules'
-				&& d !== 'coverage'
-				&& d !== 'helpers'
-				&& d !== 'test'
-				&& fs.statSync(d).isDirectory();
+			return !d.startsWith('.') && !ignoreDirs.includes(d) && fs.statSync(d).isDirectory();
 		});
 		t.deepEqual(subPackages, dirs, 'main export subpackages matches dirs in the package root');
 

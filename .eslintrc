@@ -4,6 +4,7 @@
 	"extends": "@ljharb/eslint-config/node/0.4",
 
 	"rules": {
+		"array-bracket-newline": 0,
 		"global-require": 1,
 		"no-console": 0,
 		"no-invalid-this": 1,
