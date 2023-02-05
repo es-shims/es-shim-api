@@ -1,7 +1,7 @@
 {
 	"root": true,
 
-	"extends": "@ljharb",
+	"extends": "@ljharb/eslint-config/node/0.4",
 
 	"rules": {
 		"global-require": 1,
