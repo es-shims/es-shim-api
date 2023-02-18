@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.3.1](https://github.com/es-shims/es-shim-api/compare/v2.3.0...v2.3.1) - 2023-02-17
+
+### Commits
+
+- [meta] add `auto-changelog` [`7ba8adb`](https://github.com/es-shims/es-shim-api/commit/7ba8adb08399c225cd069c094c0cf2d45170ce3d)
+- [Fix] allow multi to be non-functions, as long as they are defined [`4cb4210`](https://github.com/es-shims/es-shim-api/commit/4cb421009ffb3b1adf3f7a544ca867662fa8f41c)
+
 <!-- auto-changelog-above -->
 
 2.3.0 / 2023-02-04
