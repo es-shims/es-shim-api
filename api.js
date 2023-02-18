@@ -92,7 +92,13 @@ var doValidation = function doActualValidation(t, packageDir, name) {
 	var prefix = isMulti ? path.basename(packageDir) + ': ' : '';
 
 	t.test(prefix + 'export', function (st) {
-		st.equal(typeof module, 'function', 'module is a function');
+		if (isProperty) {
+			st.comment('# SKIP module that is a data property need not be a function');
+		} else if (isMulti) {
+			st.notEqual(typeof module, 'undefined', 'module is not `undefined`');
+		} else {
+			st.equal(typeof module, 'function', 'module is a function (pass `--property` to skip this test)');
+		}
 		st.test('module is NOT bound (pass `--bound` to skip this test)', { skip: isBound }, function (st2) {
 			st2.equal(module, getPolyfill(), 'module.exports === getPolyfill()');
 			st2.end();
@@ -108,6 +114,8 @@ var doValidation = function doActualValidation(t, packageDir, name) {
 		}
 		if (isProperty) {
 			st.comment('# SKIP implementation that is a data property need not be a function');
+		} else if (isMulti) {
+			st.notEqual(typeof implementation, 'undefined', 'implementation is not `undefined`');
 		} else {
 			st.equal(typeof implementation, 'function', 'implementation is a function (pass `--property` to skip this test)');
 		}
