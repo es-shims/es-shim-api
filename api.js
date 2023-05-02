@@ -9,6 +9,8 @@ var existsSync = path.existsSync || fs.existsSync;
 var spawn = require('child_process').spawn;
 
 var flatMap = require('array.prototype.flatmap');
+var keys = require('object-keys');
+var includes = require('array-includes');
 
 var args = process.argv.slice(2); // remove node, and script name
 
@@ -162,6 +164,23 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		name = nameOrFilePaths[0];
 		packageDir = nameOrFilePaths[1];
 	}
+
+	t.test('`exports` field', { skip: !('exports' in pkg) }, function (st) {
+		var expectedKeys = ['.', './auto', './polyfill', './implementation', './shim', './package.json'];
+		var keysToCheck = keys(pkg.exports).filter(function (key) {
+			return includes(expectedKeys, key);
+		});
+		st.deepEqual(keysToCheck, expectedKeys, 'expected entrypoints are present in the proper order');
+
+		keysToCheck.forEach(function (key) {
+			st.ok(fs.existsSync(pkg.exports[key]), 'entrypoint "' + key + '" points to "' + pkg.exports[key] + '" which exists');
+		});
+
+		st.equal(pkg.exports['./package.json'], './package.json', 'package.json is exposed');
+
+		st.end();
+	});
+
 	if (isMulti) {
 		var subPackages = requireOrEvalError(name);
 		if (subPackages instanceof EvalError) {
