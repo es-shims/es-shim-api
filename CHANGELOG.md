@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.4.1](https://github.com/es-shims/es-shim-api/compare/v2.4.0...v2.4.1) - 2023-05-03
+
+### Commits
+
+- [Fix] in `--multi`, `exports` should not have polyfill or impl entrypoints [`a6f4a41`](https://github.com/es-shims/es-shim-api/commit/a6f4a41d743d4d4dc238cf2e5cd9e7ea1787287b)
+
 ## [v2.4.0](https://github.com/es-shims/es-shim-api/compare/v2.3.1...v2.4.0) - 2023-05-02
 
 ### Commits
