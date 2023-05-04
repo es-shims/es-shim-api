@@ -166,7 +166,9 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 	}
 
 	t.test('`exports` field', { skip: !('exports' in pkg) }, function (st) {
-		var expectedKeys = ['.', './auto', './polyfill', './implementation', './shim', './package.json'];
+		var expectedKeys = isMulti
+			? ['.', './auto', './shim', './package.json']
+			: ['.', './auto', './polyfill', './implementation', './shim', './package.json'];
 		var keysToCheck = keys(pkg.exports).filter(function (key) {
 			return includes(expectedKeys, key);
 		});
