@@ -42,6 +42,7 @@
 	"dependencies": {
 		"array-includes": "^3.1.6",
 		"array.prototype.flatmap": "^1.3.1",
+		"object-inspect": "^1.12.3",
 		"object-keys": "^1.1.1",
 		"tape": "^5.6.3"
 	},

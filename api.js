@@ -11,6 +11,7 @@ var spawn = require('child_process').spawn;
 var flatMap = require('array.prototype.flatmap');
 var keys = require('object-keys');
 var includes = require('array-includes');
+var inspect = require('object-inspect');
 
 var args = process.argv.slice(2); // remove node, and script name
 
@@ -175,7 +176,9 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		st.deepEqual(keysToCheck, expectedKeys, 'expected entrypoints are present in the proper order');
 
 		keysToCheck.forEach(function (key) {
-			st.ok(fs.existsSync(pkg.exports[key]), 'entrypoint "' + key + '" points to "' + pkg.exports[key] + '" which exists');
+			var rhs = pkg.exports[key];
+			var exists = [].concat(rhs).some(fs.existsSync);
+			st.ok(exists, 'entrypoint "' + key + '" points to "' + inspect(rhs) + '" which exists (or is an array with one item that exists)');
 		});
 
 		st.equal(pkg.exports['./package.json'], './package.json', 'package.json is exposed');
