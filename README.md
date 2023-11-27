@@ -2,8 +2,6 @@
 
 [![github actions][actions-image]][actions-url]
 [![coverage][codecov-image]][codecov-url]
-[![dependency status][deps-svg]][deps-url]
-[![dev dependency status][dev-deps-svg]][dev-deps-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
@@ -59,21 +57,21 @@ es-shim-api array-includes --bound
 ## Tests
 Simply clone the repo, `npm install`, and run `npm test`
 
-[package-url]: https://npmjs.org/package/number.parseint
-[npm-version-svg]: https://versionbadg.es/es-shims/Number.parseInt.svg
-[deps-svg]: https://david-dm.org/es-shims/Number.parseInt.svg
-[deps-url]: https://david-dm.org/es-shims/Number.parseInt
-[dev-deps-svg]: https://david-dm.org/es-shims/Number.parseInt/dev-status.svg
-[dev-deps-url]: https://david-dm.org/es-shims/Number.parseInt#info=devDependencies
-[npm-badge-png]: https://nodei.co/npm/number.parseint.png?downloads=true&stars=true
-[license-image]: https://img.shields.io/npm/l/number.parseint.svg
+[package-url]: https://npmjs.org/package/@es-shims/api
+[npm-version-svg]: https://versionbadg.es/es-shims/es-shim-api.svg
+[deps-svg]: https://david-dm.org/es-shims/es-shim-api.svg
+[deps-url]: https://david-dm.org/es-shims/es-shim-api
+[dev-deps-svg]: https://david-dm.org/es-shims/es-shim-api/dev-status.svg
+[dev-deps-url]: https://david-dm.org/es-shims/es-shim-api#info=devDependencies
+[npm-badge-png]: https://nodei.co/npm/@es-shims/api.png?downloads=true&stars=true
+[license-image]: https://img.shields.io/npm/l/@es-shims/api.svg
 [license-url]: LICENSE
-[downloads-image]: https://img.shields.io/npm/dm/number.parseint.svg
-[downloads-url]: https://npm-stat.com/charts.html?package=number.parseint
-[codecov-image]: https://codecov.io/gh/es-shims/Number.parseInt/branch/main/graphs/badge.svg
-[codecov-url]: https://app.codecov.io/gh/es-shims/Number.parseInt/
-[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/es-shims/Number.parseInt
-[actions-url]: https://github.com/es-shims/Number.parseInt/actions
+[downloads-image]: https://img.shields.io/npm/dm/@es-shims/api.svg
+[downloads-url]: https://npm-stat.com/charts.html?package=@es-shims/api
+[codecov-image]: https://codecov.io/gh/es-shims/es-shim-api/branch/main/graphs/badge.svg
+[codecov-url]: https://app.codecov.io/gh/es-shims/es-shim-api/
+[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/es-shims/es-shim-api
+[actions-url]: https://github.com/es-shims/es-shim-api/actions
 [es-abstract-url]: https://npmjs.com/package/es-abstract
 [define-properties-url]: https://npmjs.com/package/define-properties
 [call-bind-url]: https://npmjs.com/package/call-bind
