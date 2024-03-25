@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.5.0](https://github.com/es-shims/es-shim-api/compare/v2.4.2...v2.5.0) - 2024-03-24
+
+### Fixed
+
+- [meta] fix badges and URLs [`#27`](https://github.com/es-shims/es-shim-api/issues/27)
+
+### Commits
+
+- [New] `--multi`: ensure all declared subpackages have proper `exports` [`8bf6ae2`](https://github.com/es-shims/es-shim-api/commit/8bf6ae28d6353c1db524394578b4b9990f144895)
+- [New] automatically detect `--multi` mode [`4e7f6d7`](https://github.com/es-shims/es-shim-api/commit/4e7f6d7ed5730e04051583b7e08285e3af49a4d8)
+- [Deps] update `array-includes`, `array.prototype.flatmap`, `object-inspect`, `tape` [`2b75c3e`](https://github.com/es-shims/es-shim-api/commit/2b75c3eddc239c3f74c12c7e460541df0d9a85e3)
+- [Deps] update `array-includes`, `tape` [`906b618`](https://github.com/es-shims/es-shim-api/commit/906b6184f9cec05b887494946005e66a0fd0e518)
+- [Dev Deps] update `aud`, `npmignore` [`1bfc395`](https://github.com/es-shims/es-shim-api/commit/1bfc395a35ef73b17ffd4fa4cc11f2bcebd799a5)
+- [Dev Deps] update `@ljharb/eslint-config`, `aud` [`4f6fced`](https://github.com/es-shims/es-shim-api/commit/4f6fcedc032bc749375c9c03ce1c9916dab713c9)
+
 ## [v2.4.2](https://github.com/es-shims/es-shim-api/compare/v2.4.1...v2.4.2) - 2023-05-15
 
 ### Commits
