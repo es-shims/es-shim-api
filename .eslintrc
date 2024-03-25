@@ -6,6 +6,7 @@
 	"rules": {
 		"array-bracket-newline": 0,
 		"global-require": 1,
+		"max-nested-callbacks": 0,
 		"no-console": 0,
 		"no-invalid-this": 1,
 	},

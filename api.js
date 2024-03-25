@@ -170,15 +170,18 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		var expectedKeys = isMulti
 			? ['.', './auto', './shim', './package.json']
 			: ['.', './auto', './polyfill', './implementation', './shim', './package.json'];
-		var keysToCheck = keys(pkg.exports).filter(function (key) {
+
+		var exportsKeys = keys(pkg.exports);
+
+		var keysToCheck = exportsKeys.filter(function (key) {
 			return includes(expectedKeys, key);
 		});
 		st.deepEqual(keysToCheck, expectedKeys, 'expected entrypoints are present in the proper order');
 
-		keysToCheck.forEach(function (key) {
+		exportsKeys.forEach(function (key) {
 			var rhs = pkg.exports[key];
-			var exists = [].concat(rhs).some(fs.existsSync);
-			st.ok(exists, 'entrypoint "' + key + '" points to "' + inspect(rhs) + '" which exists (or is an array with one item that exists)');
+			var exists = [].concat(rhs).some(existsSync);
+			st.ok(exists, 'entrypoint `' + key + '` points to `' + inspect(rhs) + '` which exists (or is an array with one item that exists)');
 		});
 
 		st.equal(pkg.exports['./package.json'], './package.json', 'package.json is exposed');
@@ -215,6 +218,42 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		subPackages.forEach(function (subPackage) {
 			var subPackageDir = path.join(path.dirname(name), subPackage);
 			doValidation(t, subPackageDir, subPackageDir);
+		});
+
+		t.test('subpackages, `exports` field', { skip: !('exports' in pkg) }, function (st) {
+			subPackages.forEach(function (subPackage) {
+				var subPackageLHS = [
+					'./' + subPackage,
+					'./' + subPackage + '/auto',
+					'./' + subPackage + '/polyfill',
+					'./' + subPackage + '/implementation',
+					'./' + subPackage + '/shim',
+				];
+
+				subPackageLHS.forEach(function (lhs) {
+					st.ok(lhs in pkg.exports, '`' + lhs + '` is in `exports`');
+					if (lhs in pkg.exports) {
+						var rhs = pkg.exports[lhs];
+						var resolved = path.resolve(path.join(packageDir, rhs));
+						var lhsGuess = './' + path.relative(
+							packageDir,
+							path.join(
+								path.dirname(resolved),
+								path.basename(resolved, path.extname(resolved))
+							)
+						).replace(/\/index$/, '');
+						st.equal(lhs, lhsGuess, 'subpackage `' + subPackage + '` LHS + `' + lhs + '` resolves to `' + lhsGuess + '`');
+					}
+				});
+
+				st.deepEqual(
+					keys(pkg.exports).filter(function (lhs) { return subPackageLHS.indexOf(lhs) > -1; }),
+					subPackageLHS,
+					'subpackage `' + subPackage + '` exports the expected entries in the proper order'
+				);
+			});
+
+			st.end();
 		});
 	} else {
 		doValidation(t, packageDir, name);
