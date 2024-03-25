@@ -58,7 +58,18 @@ if (moduleNames.length < 1) {
 		process.exit(2);
 	}
 	moduleNames.push([pkg.name + ' (current directory)', [path.join(process.cwd(), pkg.main || ''), process.cwd()]]);
+
+	var mainIsJSON = path.extname(require.resolve(process.cwd())) === '.json';
+	if (isMulti && !mainIsJSON) {
+		console.error('Error: --multi requires package.json main to be a JSON file');
+		process.exit(3);
+	}
+	if (!isMulti && mainIsJSON) {
+		isMulti = true;
+		console.error('# automatic `--multi` mode enabled');
+	}
 }
+
 var requireOrEvalError = function (name) {
 	try {
 		return require(name);
