@@ -113,10 +113,12 @@ var doValidation = function doActualValidation(t, packageDir, name) {
 		} else {
 			st.equal(typeof module, 'function', 'module is a function (pass `--property` to skip this test)');
 		}
+
 		st.test('module is NOT bound (pass `--bound` to skip this test)', { skip: isBound }, function (st2) {
 			st2.equal(module, getPolyfill(), 'module.exports === getPolyfill()');
 			st2.end();
 		});
+
 		st.end();
 	});
 
@@ -158,7 +160,16 @@ var doValidation = function doActualValidation(t, packageDir, name) {
 			if (skipShimPolyfill) {
 				st.comment('# SKIP ' + msg);
 			} else {
-				st.equal(shim(), getPolyfill(), msg);
+				var builtin = shim();
+				st.equal(builtin, getPolyfill(), msg);
+
+				st.test('builtin does not have own properties added', function (s2t) {
+					s2t.notOk('implementation' in builtin, 'has no `implementation` property');
+					s2t.notOk('getPolyfill' in builtin, 'has no `getPolyfill` property');
+					s2t.notOk('shim' in builtin, 'has no `shim` property');
+
+					s2t.end();
+				});
 			}
 		}
 		st.end();
