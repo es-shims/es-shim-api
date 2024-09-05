@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v2.5.1](https://github.com/es-shims/es-shim-api/compare/v2.5.0...v2.5.1) - 2024-09-04
+
+### Commits
+
+- [Fix] ensure a bound index does not mutate the builtin [`568ddaf`](https://github.com/es-shims/es-shim-api/commit/568ddafdc41db47d6af45f612d062afd65ff6c96)
+- [Fix] ensure bound shim is actually bound [`04ec735`](https://github.com/es-shims/es-shim-api/commit/04ec735db2d72fbf01fce9ebb00ac1de0c23f26f)
+- [Deps] update `object-inspect`, `tape` [`eaf5581`](https://github.com/es-shims/es-shim-api/commit/eaf5581aed75be6bc7d400a08d4c5ad56f018555)
+- [Tests] replace `aud` with `npm audit` [`bfc8156`](https://github.com/es-shims/es-shim-api/commit/bfc815654056cda075af18bb6ede688e96c38dbb)
+- [Dev Deps] update `@ljharb/eslint-config` [`3ba4c80`](https://github.com/es-shims/es-shim-api/commit/3ba4c80ed850413af33a07870568597592617c03)
+
 ## [v2.5.0](https://github.com/es-shims/es-shim-api/compare/v2.4.2...v2.5.0) - 2024-03-24
 
 ### Fixed
