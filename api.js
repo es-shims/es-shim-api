@@ -118,6 +118,10 @@ var doValidation = function doActualValidation(t, packageDir, name) {
 			st2.equal(module, getPolyfill(), 'module.exports === getPolyfill()');
 			st2.end();
 		});
+		st.test('module is bound (do not pass `--bound` to skip this test)', { skip: !isBound }, function (st2) {
+			st2.notEqual(module, getPolyfill(), 'module.exports !== getPolyfill()');
+			st2.end();
+		});
 
 		st.end();
 	});
