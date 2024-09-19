@@ -10,16 +10,23 @@
 		"max-nested-callbacks": 0,
 		"no-console": 0,
 		"no-invalid-this": 1,
+		"sort-keys": 0,
 	},
 
 	"overrides": [
 		{
-			"files": "api.js",
+			"files": "api.mjs",
 			"rules": {
 				"max-lines-per-function": 0,
 				"max-params": 0,
 				"max-statements": 0,
 				"no-process-exit": 0,
+			},
+		},
+		{
+			"files": "pargs.mjs",
+			"rules": {
+				"max-lines-per-function": 0,
 			},
 		},
 	],

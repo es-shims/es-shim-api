@@ -7,7 +7,7 @@
 	},
 	"description": "Loosely test a package's compliance with the es-shim API",
 	"bin": {
-		"es-shim-api": "api.js"
+		"es-shim-api": "api.mjs"
 	},
 	"license": "MIT",
 	"scripts": {
@@ -41,6 +41,7 @@
 	],
 	"dependencies": {
 		"object-inspect": "^1.13.2",
+		"object.groupby": "^1.0.3",
 		"semver": "^6.3.1",
 		"tape": "^5.8.1"
 	},

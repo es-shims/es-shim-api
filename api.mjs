@@ -1,50 +1,62 @@
 #!/usr/bin/env node
 
-'use strict';
-
-const test = require('tape');
-const path = require('path');
-const {
+import test from 'tape';
+import path, { join } from 'path';
+import {
 	existsSync,
 	readdirSync,
+	readFileSync,
 	statSync,
-} = require('fs');
-const { spawn } = require('child_process');
+} from 'fs';
+import { spawn } from 'child_process';
 
-const inspect = require('object-inspect');
-const semver = require('semver');
+import inspect from 'object-inspect';
+import semver from 'semver';
+import { createRequire } from 'module';
+
+import pargs from './pargs.mjs';
+
+const require = createRequire(import.meta.url);
 
 const { version } = require('./package.json');
 const major = semver.major(version);
 
-const args = process.argv.slice(2); // remove node, and script name
+const help = readFileSync(join(import.meta.dirname, './help.txt'), 'utf8');
 
-function argEquals(argName) {
-	return (arg) => arg === argName;
-}
-function not(fn) {
-	return function () {
-		// eslint-disable-next-line prefer-rest-params
-		return !fn.apply(this, arguments);
-	};
-}
-function isArg(x) {
-	return x.slice(0, 2) === '--';
-}
+const {
+	positionals,
+	values: {
+		bound: isBound,
+		property: isProperty,
+		'skip-shim-returns-polyfill': skipShimPolyfill,
+		'skip-auto-shim': skipAutoShim,
+		multi,
+		'ignore-dirs': rawIgnoreDirs,
+	},
+} = pargs(help, import.meta.filename, {
+	allowPositionals: true,
+	options: {
+		bound: { type: 'boolean' },
+		property: { type: 'boolean' },
+		'skip-shim-returns-polyfill': { type: 'boolean' },
+		'skip-auto-shim': { type: 'boolean' },
+		multi: { type: 'boolean' },
+		'ignore-dirs': {
+			type: 'string',
+			multiple: true,
+			default: [],
+		},
+	},
+});
 
-const isBound = args.some(argEquals('--bound'));
-const isProperty = args.some(argEquals('--property'));
-const skipShimPolyfill = args.some(argEquals('--skip-shim-returns-polyfill'));
-const skipAutoShim = args.some(argEquals('--skip-auto-shim'));
-let isMulti = args.some(argEquals('--multi'));
-const extraIgnoreDirs = args.flatMap((x) => (x.startsWith('--ignore-dirs=') ? x.slice('--ignore-dirs='.length).split(',') : []));
+let isMulti = multi;
 
-const ignoreDirs = ['node_modules', 'coverage', 'helpers', 'test', 'aos'].concat(extraIgnoreDirs);
+const ignoreDirs = ['node_modules', 'coverage', 'helpers', 'test', 'aos'].concat(rawIgnoreDirs.flatMap((x) => x.split(',')));
 
 function makeEntries(name) {
 	return [name, name];
 }
-const moduleNames = args.filter(not(isArg)).map(makeEntries);
+const moduleNames = positionals.map(makeEntries);
 let pkg;
 if (moduleNames.length < 1) {
 	const packagePath = path.join(process.cwd(), 'package.json');
@@ -87,7 +99,7 @@ const testAuto = function testAutoModule(t, prefix, packageDir, asMulti) {
 		} else {
 			require(path.join(packageDir, '/auto'));
 			st.comment(`${msg} (pass \`--skip-auto-shim\` to skip this test)`);
-			const proc = spawn(path.join(__dirname, asMulti ? 'multiAutoTest.js' : 'autoTest.js'), [], { cwd: packageDir, stdio: 'inherit' });
+			const proc = spawn(path.join(import.meta.dirname, asMulti ? 'multiAutoTest.js' : 'autoTest.js'), [], { cwd: packageDir, stdio: 'inherit' });
 			st.plan(1);
 			proc.on('close', (code) => {
 				st.equal(code, 0, 'auto invokes shim');
