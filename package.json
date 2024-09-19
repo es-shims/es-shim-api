@@ -20,7 +20,7 @@
 		"test": "npm run --silent tests-only",
 		"posttest": "npx npm@'>=10.2' audit --production",
 		"tests-only": "echo 'no tests yet :-('",
-		"lint": "eslint ."
+		"lint": "eslint --ext=js,mjs ."
 	},
 	"repository": {
 		"type": "git",
@@ -58,25 +58,10 @@
 		"safe-publish-latest": "^2.0.0"
 	},
 	"testling": {
-		"files": "test.js",
-		"browsers": [
-			"iexplore/6.0..latest",
-			"firefox/3.0..6.0",
-			"firefox/15.0..latest",
-			"firefox/nightly",
-			"chrome/4.0..10.0",
-			"chrome/20.0..latest",
-			"chrome/canary",
-			"opera/10.0..latest",
-			"opera/next",
-			"safari/4.0..latest",
-			"ipad/6.0..latest",
-			"iphone/6.0..latest",
-			"android-browser/4.2"
-		]
+		"files": "test.js"
 	},
 	"engines": {
-		"node": ">= 0.4"
+		"node": "^20.17 || >= 22.9"
 	},
 	"auto-changelog": {
 		"output": "CHANGELOG.md",

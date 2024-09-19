@@ -1,11 +1,12 @@
 {
 	"root": true,
 
-	"extends": "@ljharb/eslint-config/node/0.4",
+	"extends": "@ljharb/eslint-config/node/20",
 
 	"rules": {
 		"array-bracket-newline": 0,
 		"global-require": 1,
+		"func-style": 0,
 		"max-nested-callbacks": 0,
 		"no-console": 0,
 		"no-invalid-this": 1,

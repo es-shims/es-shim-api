@@ -1,8 +1,8 @@
 'use strict';
 
-var calls = [];
-var shim = function fakeShim() {
-	calls.push([this, Array.prototype.slice.call(arguments)]);
+const calls = [];
+const shim = function fakeShim(...args) {
+	calls.push([this, args]);
 };
 shim.calls = calls;
 
