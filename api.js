@@ -11,9 +11,6 @@ const {
 } = require('fs');
 const { spawn } = require('child_process');
 
-const flatMap = require('array.prototype.flatmap');
-const keys = require('object-keys');
-const includes = require('array-includes');
 const inspect = require('object-inspect');
 const semver = require('semver');
 
@@ -40,7 +37,7 @@ const isProperty = args.some(argEquals('--property'));
 const skipShimPolyfill = args.some(argEquals('--skip-shim-returns-polyfill'));
 const skipAutoShim = args.some(argEquals('--skip-auto-shim'));
 let isMulti = args.some(argEquals('--multi'));
-const extraIgnoreDirs = flatMap(args, (x) => (x.startsWith('--ignore-dirs=') ? x.slice('--ignore-dirs='.length).split(',') : []));
+const extraIgnoreDirs = args.flatMap((x) => (x.startsWith('--ignore-dirs=') ? x.slice('--ignore-dirs='.length).split(',') : []));
 
 const ignoreDirs = ['node_modules', 'coverage', 'helpers', 'test', 'aos'].concat(extraIgnoreDirs);
 
@@ -204,9 +201,9 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 			? ['.', './auto', './shim', './package.json']
 			: ['.', './auto', './polyfill', './implementation', './shim', './package.json'];
 
-		const exportsKeys = keys(pkg.exports);
+		const exportsKeys = Object.keys(pkg.exports);
 
-		const keysToCheck = exportsKeys.filter((key) => includes(expectedKeys, key));
+		const keysToCheck = exportsKeys.filter((key) => expectedKeys.includes(key));
 		st.deepEqual(keysToCheck, expectedKeys, 'expected entrypoints are present in the proper order');
 
 		exportsKeys.forEach((key) => {
@@ -276,7 +273,7 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 				});
 
 				st.deepEqual(
-					keys(pkg.exports).filter((lhs) => subPackageLHS.indexOf(lhs) > -1),
+					Object.keys(pkg.exports).filter((lhs) => subPackageLHS.indexOf(lhs) > -1),
 					subPackageLHS,
 					`subpackage \`${subPackage}\` exports the expected entries in the proper order`,
 				);
