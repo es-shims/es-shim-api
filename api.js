@@ -12,6 +12,10 @@ var flatMap = require('array.prototype.flatmap');
 var keys = require('object-keys');
 var includes = require('array-includes');
 var inspect = require('object-inspect');
+var semver = require('semver');
+
+var version = require('./package.json').version;
+var major = semver.major(version);
 
 var args = process.argv.slice(2); // remove node, and script name
 
@@ -127,11 +131,12 @@ var doValidation = function doActualValidation(t, packageDir, name) {
 	});
 
 	t.test(prefix + 'implementation', function (st) {
-		if (isMulti) {
-			st.comment('# SKIP module.exports.implementation === implementation.js');
-		} else {
-			st.equal(implementation, module.implementation, 'module.exports.implementation === implementation.js');
-		}
+		st.notOk(
+			'implementation' in module,
+			'module.exports lacks a `implementation` property',
+			{ skip: isMulti }
+		);
+
 		if (isProperty) {
 			st.comment('# SKIP implementation that is a data property need not be a function');
 		} else if (isMulti) {
@@ -139,26 +144,31 @@ var doValidation = function doActualValidation(t, packageDir, name) {
 		} else {
 			st.equal(typeof implementation, 'function', 'implementation is a function (pass `--property` to skip this test)');
 		}
+
 		st.end();
 	});
 
 	t.test(prefix + 'polyfill', function (st) {
-		if (isMulti) {
-			st.comment('# SKIP module.exports.getPolyfill === polyfill.js');
-		} else {
-			st.equal(getPolyfill, module.getPolyfill, 'module.exports.getPolyfill === polyfill.js');
-		}
+		st.notOk(
+			'getPolyfill' in module,
+			'module.exports lacks a `getPolyfill` property',
+			{ skip: isMulti }
+		);
+
 		st.equal(typeof getPolyfill, 'function', 'getPolyfill is a function');
+
 		st.end();
 	});
 
 	t.test(prefix + 'shim', function (st) {
-		if (isMulti) {
-			st.comment('# SKIP module.exports.shim === shim.js');
-		} else {
-			st.equal(shim, module.shim, 'module.exports.shim === shim.js');
-		}
+		st.notOk(
+			'shim' in module,
+			'module.exports lacks a `shim` property',
+			{ skip: isMulti }
+		);
+
 		st.equal(typeof shim, 'function', 'shim is a function');
+
 		if (typeof shim === 'function') {
 			var msg = 'shim returns polyfill (pass `--skip-shim-returns-polyfill` to skip this test)';
 			if (skipShimPolyfill) {
@@ -291,7 +301,7 @@ var validateModule = function validateAPIModule(t, nameOrFilePaths) {
 moduleNames.forEach(function (data) {
 	var name = data[0];
 	var filePath = data[1];
-	test('es-shim API : testing module: ' + name, function (t) {
+	test('es-shim API v' + major + ': testing module: ' + name, function (t) {
 		t.comment('* ----------------------------- * #');
 		t.error(validateModule(t, filePath), 'expected no error');
 		t.end();

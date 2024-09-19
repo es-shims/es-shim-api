@@ -8,13 +8,14 @@
 [![npm badge][npm-badge-png]][package-url]
 
 ## API Contract
-For any given “es-shim API”-compliant package `foo`, the following invariants must hold:
+For any given “es-shim API v3”-compliant package `foo`, the following invariants must hold:
  - This package will run in an environment supporting the oldest JS version in which the spec’s semantics are achievable - ES3, ES5, and/or ES6. The package should indicate its minimum level of required environment support in its README.
  - The package must attempt to support `node`/`io.js`, all versions of all ES3-compliant browsers or later, Web Workers, and `node-webkit`. Other environments are a plus, but not expected.
  - `require('foo')` is a spec-compliant JS or native function. However, if the function’s behavior depends on a receiver (a “this” value), then the first argument to this function will be used as that receiver. The package should indicate if this is the case in its README.
- - `require('foo').implementation` or `require('foo/implementation')` is a spec-compliant JS function, that will depend on a receiver (a “this” value) as the spec requires.
- - `require('foo').getPolyfill` or `require('foo/polyfill')` is a function that when invoked, will return the most compliant and performant function that it can - if a native version is available, and does not violate the spec, then the native function will be returned - otherwise, either the `implementation`, or a custom, wrapped version of the native function, will be returned. This is also the result that will be used as the default export.
- - `require('foo').shim` or `require('foo/shim')` is a function that when invoked, will call `getPolyfill`, and if the polyfill doesn’t match the built-in value, will install it into the global environment.
+  - In the case of static methods like `Promise.all` that depend on their receiver without a fallback, the index must ensure that receiverless invocation acts as if the static method was called on its original object, but must also allow `.call`/`.bind`/`.apply` to alter the receiver when relevant.
+ - `require('foo/implementation')` is a spec-compliant JS function, that will depend on a receiver (a “this” value) as the spec requires.
+ - `require('foo/polyfill')` is a function that when invoked, will return the most compliant and performant function that it can - if a native version is available, and does not violate the spec, then the native function will be returned - otherwise, either the `implementation`, or a custom, wrapped version of the native function, will be returned. This is also the result that will be used as the default export.
+ - `require('foo/shim')` is a function that when invoked, will call `getPolyfill`, and if the polyfill doesn’t match the built-in value, will install it into the global environment.
  - `require('foo/auto')` will automatically invoke the `shim` method.
  - The only place the package may modify the environment is within its `shim` method.
  - Naturally, `npm test` must run the package’s tests.
@@ -30,9 +31,9 @@ If your package contains multiple shims, you can pass `--multi` to apply these i
  - The root must NOT contain an `implementation` entry point.
 
 ## Recommended dependencies
- - Please use the [es-abstract][es-abstract-url] module to ensure spec-compliant behavior via the spec’s internal abstract operations.
- - Please use the [define-properties][define-properties-url] module to trivially define non-enumerable properties, where supported.
- - Please use the [call-bind][call-bind-url] module to cache references to all builtin methods, to be robust against later modification of the environment.
+ - Please use the [es-abstract][es-abstract-url] package to ensure spec-compliant behavior via the spec’s internal abstract operations.
+ - Please use the [define-properties][define-properties-url] package to trivially define non-enumerable properties, where supported.
+ - Please use the [call-bind][call-bind-url] package to cache references to all builtin methods, to be robust against later modification of the environment.
 
 
 ## How to denote compliance
@@ -45,7 +46,7 @@ Please modify “ES3” as needed to the level of support, and please update the
 ## Binary
 Very simple and shallow tests that a package follows the `es-shim API`.
 
-Pass `--bound` to indicate that the function the package is implementing depends on having a receiver (a “this” value).
+Pass `--bound` to indicate that the function the package is implementing depends on having a receiver (a “this” value). In particular, this applies to something that is a prototype method, or a static method that depends on its receiver.
 
 ## Example
 
