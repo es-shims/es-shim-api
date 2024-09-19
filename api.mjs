@@ -11,7 +11,7 @@ import {
 import { spawn } from 'child_process';
 
 import inspect from 'object-inspect';
-import semver from 'semver';
+import major from 'semver/functions/major.js';
 import { createRequire } from 'module';
 
 import pargs from './pargs.mjs';
@@ -19,7 +19,7 @@ import pargs from './pargs.mjs';
 const require = createRequire(import.meta.url);
 
 const { version } = require('./package.json');
-const major = semver.major(version);
+const majorV = major(version);
 
 const help = readFileSync(join(import.meta.dirname, './help.txt'), 'utf8');
 
@@ -301,7 +301,7 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 };
 
 moduleNames.forEach(([name, filePath]) => {
-	test(`es-shim API v${major}: testing module: ${name}`, (t) => {
+	test(`es-shim API v${majorV}: testing module: ${name}`, (t) => {
 		t.comment('* ----------------------------- * #');
 		t.error(validateModule(t, filePath), 'expected no error');
 		t.end();
