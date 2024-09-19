@@ -1,20 +1,18 @@
 Usage: es-shim-api [options] <optional space-separated module names>
 
 Options:
-  --multi                       indicate that the package contains multiple shims
-    [boolean]
+  --type                        indicate which type of polyfill/shim this is:
+                                  - `method`: receiver-sensitive method (default)
+                                  - `function`: non-receiver-sensitive function
+                                  - `property`: non-function data property
+                                  - `constructor`: constructor
+                                  - `multi`: a package that contains multiple shims
 
-  --bound                       indicate that the function the package is implementing depends on having a receiver (a “this” value)
-    [boolean]
-
-  --property                    indicate that the polyfill is a normal property, instead of a function
-    [boolean]
-
-  --skip-shim-returns-polyfill  indicate that the `shim` module does not return the same value as `polyfill`, by design
-    [boolean]
+  --skip-shim-returns-polyfill  indicate that `shim` does not return the same
+    [boolean]                   value as `polyfill`, by design
 
   --skip-auto-shim              skip testing that `auto` invokes `shim`
     [boolean]
 
-  --ignore-dirs <path>  File path to write output to. If omitted, output will be printed to stdout.
-    [string]
+  --ignore-dirs <path>          File path to write output to.
+    [string]                    If omitted, output will be printed to stdout.

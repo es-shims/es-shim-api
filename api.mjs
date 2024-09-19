@@ -26,23 +26,22 @@ const help = readFileSync(join(import.meta.dirname, './help.txt'), 'utf8');
 const {
 	positionals,
 	values: {
-		bound: isBound,
-		property: isProperty,
+		type,
 		'skip-shim-returns-polyfill': skipShimPolyfill,
 		'skip-auto-shim': skipAutoShim,
-		multi,
 		'ignore-dirs': rawIgnoreDirs,
 	},
 	// eslint-disable-next-line no-extra-parens, max-len
-} = /** @type {{ positionals: string[], values: { bound: boolean, property: boolean, 'skip-shim-returns-polyfill': boolean, 'skip-auto-shim': boolean, 'ignore-dirs': string[], multi: boolean } }} */ (
+} = /** @type {{ positionals: string[], values: { type: 'method' | 'function' | 'property' | 'constructor' | 'multi', 'skip-shim-returns-polyfill': boolean, 'skip-auto-shim': boolean, 'ignore-dirs': string[], multi: boolean } }} */ (
 	pargs(help, import.meta.filename, {
 		allowPositionals: true,
 		options: {
-			bound: { type: 'boolean' },
-			property: { type: 'boolean' },
+			type: {
+				type: 'string',
+				default: 'method',
+			},
 			'skip-shim-returns-polyfill': { type: 'boolean' },
 			'skip-auto-shim': { type: 'boolean' },
-			multi: { type: 'boolean' },
 			'ignore-dirs': {
 				type: 'string',
 				multiple: true,
@@ -52,7 +51,7 @@ const {
 	})
 );
 
-let isMulti = multi;
+let isMulti = type === 'multi';
 
 const ignoreDirs = ['node_modules', 'coverage', 'helpers', 'test', 'aos'].concat(rawIgnoreDirs.flatMap((x) => x.split(',')));
 
@@ -81,12 +80,23 @@ if (moduleNames.length < 1) {
 
 	const mainIsJSON = path.extname(require.resolve(process.cwd())) === '.json';
 	if (isMulti && !mainIsJSON) {
-		console.error('Error: --multi requires package.json main to be a JSON file');
+		console.error('Error: --type=multi requires package.json main to be a JSON file');
 		process.exit(3);
 	}
 	if (!isMulti && mainIsJSON) {
 		isMulti = true;
-		console.error('# automatic `--multi` mode enabled');
+		console.error('# automatic `--type=multi` mode enabled');
+	}
+
+	if (
+		type !== 'property'
+		&& type !== 'method'
+		&& type !== 'constructor'
+		&& type !== 'function'
+		&& type !== 'multi'
+	) {
+		console.error('`type` must be one of `method`, `function`, `property`, `constructor`, or `multi`');
+		process.exit(4);
 	}
 }
 
@@ -133,19 +143,19 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 	const prefix = isMulti ? `${path.basename(packageDir)}: ` : '';
 
 	t.test(`${prefix}export`, (st) => {
-		if (isProperty) {
+		if (type === 'property') {
 			st.comment('# SKIP module that is a data property need not be a function');
 		} else if (isMulti) {
 			st.notEqual(typeof module, 'undefined', 'module is not `undefined`');
 		} else {
-			st.equal(typeof module, 'function', 'module is a function (pass `--property` to skip this test)');
+			st.equal(typeof module, 'function', 'module is a function (pass `--type=property` to skip this test)');
 		}
 
-		st.test('module is NOT bound (pass `--bound` to skip this test)', { skip: isBound }, (st2) => {
+		st.test('module is NOT bound (pass `--type=method` to skip this test)', { skip: type === 'method' }, (st2) => {
 			st2.equal(module, getPolyfill(), 'module.exports === getPolyfill()');
 			st2.end();
 		});
-		st.test('module is bound (do not pass `--bound` to skip this test)', { skip: !isBound }, (st2) => {
+		st.test('module is bound (pass a `--type=` other than `method` to skip this test)', { skip: type !== 'method' }, (st2) => {
 			st2.notEqual(module, getPolyfill(), 'module.exports !== getPolyfill()');
 			st2.end();
 		});
@@ -160,12 +170,12 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 			{ skip: isMulti },
 		);
 
-		if (isProperty) {
+		if (type === 'property') {
 			st.comment('# SKIP implementation that is a data property need not be a function');
 		} else if (isMulti) {
 			st.notEqual(typeof implementation, 'undefined', 'implementation is not `undefined`');
 		} else {
-			st.equal(typeof implementation, 'function', 'implementation is a function (pass `--property` to skip this test)');
+			st.equal(typeof implementation, 'function', 'implementation is a function (pass `--type=property` to skip this test)');
 		}
 
 		st.end();
