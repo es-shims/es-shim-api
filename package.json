@@ -88,7 +88,8 @@
 	},
 	"publishConfig": {
 		"ignore": [
-			".github/workflows"
+			".github/workflows",
+			"shims.md"
 		]
 	}
 }
