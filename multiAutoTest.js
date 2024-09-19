@@ -12,6 +12,7 @@ assert.equal(args, 0, 'wrong number of arguments; expected 0');
 const fakeShim = require('./fakeShim');
 assert.equal(fakeShim.calls.length, 0, 'shims are not yet called');
 
+/** @type {string[]} */
 const subPackages = require(process.cwd());
 subPackages.forEach((subPackage) => {
 	require.cache[require.resolve(path.join(process.cwd(), subPackage, 'shim'))] = require.cache[require.resolve('./fakeShim')];

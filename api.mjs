@@ -33,30 +33,37 @@ const {
 		multi,
 		'ignore-dirs': rawIgnoreDirs,
 	},
-} = pargs(help, import.meta.filename, {
-	allowPositionals: true,
-	options: {
-		bound: { type: 'boolean' },
-		property: { type: 'boolean' },
-		'skip-shim-returns-polyfill': { type: 'boolean' },
-		'skip-auto-shim': { type: 'boolean' },
-		multi: { type: 'boolean' },
-		'ignore-dirs': {
-			type: 'string',
-			multiple: true,
-			default: [],
+	// eslint-disable-next-line no-extra-parens, max-len
+} = /** @type {{ positionals: string[], values: { bound: boolean, property: boolean, 'skip-shim-returns-polyfill': boolean, 'skip-auto-shim': boolean, 'ignore-dirs': string[], multi: boolean } }} */ (
+	pargs(help, import.meta.filename, {
+		allowPositionals: true,
+		options: {
+			bound: { type: 'boolean' },
+			property: { type: 'boolean' },
+			'skip-shim-returns-polyfill': { type: 'boolean' },
+			'skip-auto-shim': { type: 'boolean' },
+			multi: { type: 'boolean' },
+			'ignore-dirs': {
+				type: 'string',
+				multiple: true,
+				default: [],
+			},
 		},
-	},
-});
+	})
+);
 
 let isMulti = multi;
 
 const ignoreDirs = ['node_modules', 'coverage', 'helpers', 'test', 'aos'].concat(rawIgnoreDirs.flatMap((x) => x.split(',')));
 
+/** @type {<T extends string>(name: T) => [T, T]} */
 function makeEntries(name) {
 	return [name, name];
 }
+/** @type {[string, string | [string, string]][]} */
 const moduleNames = positionals.map(makeEntries);
+
+/** @type {{ name?: string, main?: string | false, exports?: Record<string, unknown | unknown[]> }} */
 let pkg;
 if (moduleNames.length < 1) {
 	const packagePath = path.join(process.cwd(), 'package.json');
@@ -83,13 +90,17 @@ if (moduleNames.length < 1) {
 	}
 }
 
+/** @type {(name: string) => {}} */
 function requireOrEvalError(name) {
 	try {
 		return require(name);
 	} catch (e) {
+		// @ts-expect-error it's fine if this throws on a nullish exception from the module
 		return new EvalError(e.message);
 	}
 }
+
+/** @type {(t: test.Test, prefix: string, packageDir: string, asMulti: boolean) => void} */
 const testAuto = function testAutoModule(t, prefix, packageDir, asMulti) {
 	t.test(`${prefix}auto`, (st) => {
 		const msg = 'auto is present';
@@ -107,6 +118,8 @@ const testAuto = function testAutoModule(t, prefix, packageDir, asMulti) {
 		}
 	});
 };
+
+/** @type {(t: test.Test, packageDir: string, name: string) => undefined | EvalError} */
 const doValidation = function doActualValidation(t, packageDir, name) {
 	const module = requireOrEvalError(name);
 	if (module instanceof EvalError) {
@@ -114,7 +127,8 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 	}
 	const implementation = requireOrEvalError(`${packageDir}/implementation`);
 	const shim = requireOrEvalError(`${packageDir}/shim`);
-	const getPolyfill = requireOrEvalError(`${packageDir}/polyfill`);
+	// eslint-disable-next-line no-extra-parens
+	const getPolyfill = /** @type {Function} */ (requireOrEvalError(`${packageDir}/polyfill`));
 
 	const prefix = isMulti ? `${path.basename(packageDir)}: ` : '';
 
@@ -203,39 +217,44 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 	return void undefined;
 };
 
+/** @type {(t: test.Test, nameOrFilePaths: string | [string, string]) => EvalError | undefined} */
 const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 	const [name, packageDir] = Array.isArray(nameOrFilePaths)
 		? nameOrFilePaths
 		: [nameOrFilePaths, nameOrFilePaths];
 
 	t.test('`exports` field', { skip: !('exports' in pkg) }, (st) => {
+		// eslint-disable-next-line no-extra-parens
+		const exps = /** @type {NonNullable<typeof pkg.exports>} */ (pkg.exports);
 		const expectedKeys = isMulti
 			? ['.', './auto', './shim', './package.json']
 			: ['.', './auto', './polyfill', './implementation', './shim', './package.json'];
 
-		const exportsKeys = Object.keys(pkg.exports);
+		const exportsKeys = Object.keys(exps);
 
 		const keysToCheck = exportsKeys.filter((key) => expectedKeys.includes(key));
 		st.deepEqual(keysToCheck, expectedKeys, 'expected entrypoints are present in the proper order');
 
 		exportsKeys.forEach((key) => {
-			const rhs = pkg.exports[key];
+			const rhs = exps[key];
+			// @ts-expect-error TS sucks with concat
 			const exists = [].concat(rhs).some(existsSync);
 			st.ok(exists, `entrypoint \`${key}\` points to \`${inspect(rhs)}\` which exists (or is an array with one item that exists)`);
 		});
 
-		st.equal(pkg.exports['./package.json'], './package.json', 'package.json is exposed');
+		st.equal(exps['./package.json'], './package.json', 'package.json is exposed');
 
 		st.end();
 	});
 
 	if (isMulti) {
-		const subPackages = requireOrEvalError(name);
+		// eslint-disable-next-line no-extra-parens
+		const subPackages = /** @type {string[]} */ (requireOrEvalError(name));
 		if (subPackages instanceof EvalError) {
 			return subPackages;
 		}
-		subPackages.sort();
 		t.ok(Array.isArray(subPackages), 'main export is an array of sub packages');
+		subPackages.sort();
 		t.deepEqual(
 			Object.keys(subPackages),
 			subPackages.map((_, i) => String(i)),
@@ -259,6 +278,8 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		});
 
 		t.test('subpackages, `exports` field', { skip: !('exports' in pkg) }, (st) => {
+			// eslint-disable-next-line no-extra-parens
+			const exps = /** @type {NonNullable<typeof pkg.exports>} */ (pkg.exports);
 			subPackages.forEach((subPackage) => {
 				const subPackageLHS = [
 					`./${subPackage}`,
@@ -269,9 +290,11 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 				];
 
 				subPackageLHS.forEach((lhs) => {
-					st.ok(lhs in pkg.exports, `\`${lhs}\` is in \`exports\``);
-					if (lhs in pkg.exports) {
-						const rhs = pkg.exports[lhs];
+					st.ok(lhs in exps, `\`${lhs}\` is in \`exports\``);
+					if (lhs in exps) {
+						// eslint-disable-next-line no-extra-parens
+						const rhs = /** @type {string} */ (exps[lhs]);
+						st.equal(typeof rhs, 'string', 'right-hand side of `exports` is a string');
 						const resolved = path.resolve(path.join(packageDir, rhs));
 						const lhsGuess = `./${path.relative(
 							packageDir,
@@ -285,7 +308,7 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 				});
 
 				st.deepEqual(
-					Object.keys(pkg.exports).filter((lhs) => subPackageLHS.indexOf(lhs) > -1),
+					Object.keys(exps).filter((lhs) => subPackageLHS.indexOf(lhs) > -1),
 					subPackageLHS,
 					`subpackage \`${subPackage}\` exports the expected entries in the proper order`,
 				);
