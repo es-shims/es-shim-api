@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v3.0.0](https://github.com/es-shims/es-shim-api/compare/v2.5.1...v3.0.0) - 2024-09-19
+
+### Commits
+
+- [Breaking] require node 20.17 [`84bb1ec`](https://github.com/es-shims/es-shim-api/commit/84bb1ec39e3231f6430a778b9155c67a362f1141)
+- [Refactor] use `pargs` and ESM [`21e483c`](https://github.com/es-shims/es-shim-api/commit/21e483cf99f8da0f818f2953b496ecef8a9562c3)
+- [New] add types [`3caf579`](https://github.com/es-shims/es-shim-api/commit/3caf579f4445723fd18c9b6f54f8f54c5910653e)
+- [Docs] update shims list [`531e6f1`](https://github.com/es-shims/es-shim-api/commit/531e6f19b7778a6a240f0d8f1c70fcb44345eb13)
+- [Breaking] condense some booleans into enum `type` arg [`d205d23`](https://github.com/es-shims/es-shim-api/commit/d205d23b982292d1de7a78d9cbcddd085289533d)
+- [Breaking] remove expando properties from the index [`27975e1`](https://github.com/es-shims/es-shim-api/commit/27975e1be92e0f0ea70b05f255ce973899a2349c)
+- [Deps] remove some unneeded packages [`64bb6cd`](https://github.com/es-shims/es-shim-api/commit/64bb6cdc05318155960a8fae698a85d49c2c957c)
+- [Deps] update `semver` [`abd2974`](https://github.com/es-shims/es-shim-api/commit/abd2974ad15009e6265581a9fb67003a2fe42485)
+- [Breaking] add `exports` [`f57bc0a`](https://github.com/es-shims/es-shim-api/commit/f57bc0a13ae8ff4ab34ef3a38f29e0ee5300c3eb)
+
 ## [v2.5.1](https://github.com/es-shims/es-shim-api/compare/v2.5.0...v2.5.1) - 2024-09-04
 
 ### Commits
