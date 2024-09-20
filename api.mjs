@@ -151,7 +151,7 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 			st.equal(typeof module, 'function', 'module is a function (pass `--type=property` to skip this test)');
 		}
 
-		st.test('module is NOT bound (pass `--type=method` to skip this test)', { skip: type === 'method' }, (st2) => {
+		st.test('module is NOT bound (pass `--type=method` to skip this test)', { skip: type !== 'function' && type !== 'constructor' }, (st2) => {
 			st2.equal(module, getPolyfill(), 'module.exports === getPolyfill()');
 			st2.end();
 		});
