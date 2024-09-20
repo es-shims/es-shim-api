@@ -52,7 +52,7 @@
 		"tape": "^5.8.1"
 	},
 	"devDependencies": {
-		"@arethetypeswrong/cli": "^0.15.4",
+		"@arethetypeswrong/cli": "^0.16.4",
 		"@ljharb/eslint-config": "^21.1.1",
 		"@ljharb/tsconfig": "^0.2.0",
 		"@types/node": "^20.16.5",
@@ -60,7 +60,7 @@
 		"@types/object.groupby": "^1.0.4",
 		"@types/semver": "^7.5.8",
 		"@types/tape": "^5.6.4",
-		"auto-changelog": "^2.4.0",
+		"auto-changelog": "^2.5.0",
 		"eslint": "=8.8.0",
 		"in-publish": "^2.0.1",
 		"npmignore": "^0.3.1",
