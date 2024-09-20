@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v3.0.1](https://github.com/es-shims/es-shim-api/compare/v3.0.0...v3.0.1) - 2024-09-20
+
+### Commits
+
+- [Dev Deps] update `@arethetypeswrong/cli`, `auto-changelog` [`5fcf97e`](https://github.com/es-shims/es-shim-api/commit/5fcf97e50c6293547b3de485c62480f1fa886799)
+- [Fix] `multi`: do not assume bound vs unbound [`28bca87`](https://github.com/es-shims/es-shim-api/commit/28bca8781ec88bef59e2a677c4bd40f75fc126be)
+- [Deps] update `tape` [`4a0c3cd`](https://github.com/es-shims/es-shim-api/commit/4a0c3cdbf5433790fa58181b0aabd4afc11c29b7)
+
 ## [v3.0.0](https://github.com/es-shims/es-shim-api/compare/v2.5.1...v3.0.0) - 2024-09-19
 
 ### Commits
