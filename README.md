@@ -21,7 +21,7 @@ For any given “es-shim API v3”-compliant package `foo`, the following invari
  - Naturally, `npm test` must run the package’s tests.
  - In every way possible, the package must attempt to make itself robust against the environment being modified *after* it is `require`d.
   - For example, `require('foo'); delete Function.prototype.call;` must not alter the behavior of `foo`.
-  - The most useful technique for this is shown in this example: `var callBound = require('call-bind/callBound'); var slice = callBound('Array.prototype.slice'); slice([1], 1);` — this technique works in ES3 environments, and will ensure that modifying `Array.prototype` or `Function.prototype` will not interfere with the package.
+  - The most useful technique for this is shown in this example: `var callBound = require('call-bound'); var slice = callBound('Array.prototype.slice'); slice([1], 1);` — this technique works in ES3 environments, and will ensure that modifying `Array.prototype` or `Function.prototype` will not interfere with the package.
 
 ## Multi-shim Packages
 If your package contains multiple shims, you can pass `--multi` to apply these invariants:
