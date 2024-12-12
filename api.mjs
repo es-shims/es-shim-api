@@ -165,7 +165,7 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 
 	t.test(`${prefix}implementation`, (st) => {
 		st.notOk(
-			'implementation' in module,
+			Object(module) === module && 'implementation' in module,
 			'module.exports lacks a `implementation` property',
 			{ skip: isMulti },
 		);
@@ -183,7 +183,7 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 
 	t.test(`${prefix}polyfill`, (st) => {
 		st.notOk(
-			'getPolyfill' in module,
+			Object(module) === module && 'getPolyfill' in module,
 			'module.exports lacks a `getPolyfill` property',
 			{ skip: isMulti },
 		);
@@ -195,7 +195,7 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 
 	t.test(`${prefix}shim`, (st) => {
 		st.notOk(
-			'shim' in module,
+			Object(module) === module && 'shim' in module,
 			'module.exports lacks a `shim` property',
 			{ skip: isMulti },
 		);
@@ -210,7 +210,7 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 				const builtin = shim();
 				st.equal(builtin, getPolyfill(), msg);
 
-				st.test('builtin does not have own properties added', (s2t) => {
+				st.test('builtin does not have own properties added', { skip: Object(builtin) !== builtin }, (s2t) => {
 					s2t.notOk('implementation' in builtin, 'has no `implementation` property');
 					s2t.notOk('getPolyfill' in builtin, 'has no `getPolyfill` property');
 					s2t.notOk('shim' in builtin, 'has no `shim` property');
