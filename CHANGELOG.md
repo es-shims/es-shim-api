@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v3.0.2](https://github.com/es-shims/es-shim-api/compare/v3.0.1...v3.0.2) - 2024-12-11
+
+### Commits
+
+- [Fix] avoid a crash when the module is not an object [`51037e8`](https://github.com/es-shims/es-shim-api/commit/51037e8a0e67cb02821ab900f608a244f6f9b7aa)
+- [Dev Deps] update `@arethetypeswrong/cli`, `@ljharb/tsconfig`, `@types/node`, `@types/tape` [`4b5810a`](https://github.com/es-shims/es-shim-api/commit/4b5810aae4d5d2f5f7818714f3060eaac4faa475)
+- [Deps] update `object-inspect` [`28f8f60`](https://github.com/es-shims/es-shim-api/commit/28f8f60033dc2b56a621acd81fbd7e05dd71e04b)
+- [readme] refer to extracted `call-bound` package [`59ffc02`](https://github.com/es-shims/es-shim-api/commit/59ffc02aec8fd4535f7ac6869e9dc83e94f0f797)
+
 ## [v3.0.1](https://github.com/es-shims/es-shim-api/compare/v3.0.0...v3.0.1) - 2024-09-20
 
 ### Commits
