@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 
 import test from 'tape';
-import path, { join } from 'path';
+import {
+	basename,
+	dirname,
+	extname,
+	join,
+	relative,
+	resolve,
+} from 'path';
 import {
 	existsSync,
 	readdirSync,
-	readFileSync,
 	statSync,
 } from 'fs';
 import { spawn } from 'child_process';
@@ -14,16 +20,15 @@ import inspect from 'object-inspect';
 import major from 'semver/functions/major.js';
 import { createRequire } from 'module';
 
-import pargs from './pargs.mjs';
+import pargs from 'pargs';
 
 const require = createRequire(import.meta.url);
 
 const { version } = require('./package.json');
 const majorV = major(version);
 
-const help = readFileSync(join(import.meta.dirname, './help.txt'), 'utf8');
-
 const {
+	help,
 	positionals,
 	values: {
 		type,
@@ -31,29 +36,29 @@ const {
 		'skip-auto-shim': skipAutoShim,
 		'ignore-dirs': rawIgnoreDirs,
 	},
-	// eslint-disable-next-line no-extra-parens, max-len
-} = /** @type {{ positionals: string[], values: { type: 'method' | 'function' | 'property' | 'constructor' | 'multi', 'skip-shim-returns-polyfill': boolean, 'skip-auto-shim': boolean, 'ignore-dirs': string[], multi: boolean } }} */ (
-	pargs(help, import.meta.filename, {
-		allowPositionals: true,
-		options: {
-			type: {
-				type: 'string',
-				default: 'method',
-			},
-			'skip-shim-returns-polyfill': { type: 'boolean' },
-			'skip-auto-shim': { type: 'boolean' },
-			'ignore-dirs': {
-				type: 'string',
-				multiple: true,
-				default: [],
-			},
+
+} = await pargs(import.meta.filename, {
+	allowPositionals: true,
+	options: {
+		type: {
+			type: 'string',
+			default: 'method',
 		},
-	})
-);
+		'skip-shim-returns-polyfill': { type: 'boolean' },
+		'skip-auto-shim': { type: 'boolean' },
+		'ignore-dirs': {
+			type: 'string',
+			multiple: true,
+			default: [],
+		},
+	},
+});
+
+await help();
 
 let isMulti = type === 'multi';
 
-const ignoreDirs = ['node_modules', 'coverage', 'helpers', 'test', 'aos'].concat(rawIgnoreDirs.flatMap((x) => x.split(',')));
+const ignoreDirs = ['node_modules', 'coverage', 'helpers', 'test', 'aos'].concat(/** @type {string[]} */ (rawIgnoreDirs).flatMap((x) => x.split(',')));
 
 /** @type {<T extends string>(name: T) => [T, T]} */
 function makeEntries(name) {
@@ -65,7 +70,7 @@ const moduleNames = positionals.map(makeEntries);
 /** @type {{ name?: string, main?: string | false, exports?: Record<string, unknown | unknown[]> }} */
 let pkg;
 if (moduleNames.length < 1) {
-	const packagePath = path.join(process.cwd(), 'package.json');
+	const packagePath = join(process.cwd(), 'package.json');
 	if (!existsSync(packagePath)) {
 		console.error('Error: No package.json found in the current directory');
 		console.error('at least one module name is required when not run in a directory with a package.json');
@@ -76,9 +81,9 @@ if (moduleNames.length < 1) {
 		console.error('Error: No "name" found in package.json');
 		process.exit(2);
 	}
-	moduleNames.push([`${pkg.name} (current directory)`, [path.join(process.cwd(), pkg.main || ''), process.cwd()]]);
+	moduleNames.push([`${pkg.name} (current directory)`, [join(process.cwd(), pkg.main || ''), process.cwd()]]);
 
-	const mainIsJSON = path.extname(require.resolve(process.cwd())) === '.json';
+	const mainIsJSON = extname(require.resolve(process.cwd())) === '.json';
 	if (isMulti && !mainIsJSON) {
 		console.error('Error: --type=multi requires package.json main to be a JSON file');
 		process.exit(3);
@@ -118,9 +123,9 @@ const testAuto = function testAutoModule(t, prefix, packageDir, asMulti) {
 			st.comment(`# SKIP ${msg}`);
 			st.end();
 		} else {
-			require(path.join(packageDir, '/auto'));
+			require(join(packageDir, '/auto'));
 			st.comment(`${msg} (pass \`--skip-auto-shim\` to skip this test)`);
-			const proc = spawn(path.join(import.meta.dirname, asMulti ? 'multiAutoTest.js' : 'autoTest.js'), [], { cwd: packageDir, stdio: 'inherit' });
+			const proc = spawn(join(import.meta.dirname, asMulti ? 'multiAutoTest.js' : 'autoTest.js'), [], { cwd: packageDir, stdio: 'inherit' });
 			st.plan(1);
 			proc.on('close', (code) => {
 				st.equal(code, 0, 'auto invokes shim');
@@ -140,7 +145,7 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 	// eslint-disable-next-line no-extra-parens
 	const getPolyfill = /** @type {Function} */ (requireOrEvalError(`${packageDir}/polyfill`));
 
-	const prefix = isMulti ? `${path.basename(packageDir)}: ` : '';
+	const prefix = isMulti ? `${basename(packageDir)}: ` : '';
 
 	t.test(`${prefix}export`, (st) => {
 		if (type === 'property') {
@@ -283,7 +288,7 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		t.ok(implementation instanceof EvalError, 'root lacks an `implementation` module');
 
 		subPackages.forEach((subPackage) => {
-			const subPackageDir = path.join(path.dirname(name), subPackage);
+			const subPackageDir = join(dirname(name), subPackage);
 			doValidation(t, subPackageDir, subPackageDir);
 		});
 
@@ -305,12 +310,12 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 						// eslint-disable-next-line no-extra-parens
 						const rhs = /** @type {string} */ (exps[lhs]);
 						st.equal(typeof rhs, 'string', 'right-hand side of `exports` is a string');
-						const resolved = path.resolve(path.join(packageDir, rhs));
-						const lhsGuess = `./${path.relative(
+						const resolved = resolve(join(packageDir, rhs));
+						const lhsGuess = `./${relative(
 							packageDir,
-							path.join(
-								path.dirname(resolved),
-								path.basename(resolved, path.extname(resolved)),
+							join(
+								dirname(resolved),
+								basename(resolved, extname(resolved)),
 							),
 						).replace(/\/index$/, '')}`;
 						st.equal(lhs, lhsGuess, `subpackage \`${subPackage}\` LHS + \`${lhs}\` resolves to \`${lhsGuess}\``);
