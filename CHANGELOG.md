@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v3.0.3](https://github.com/es-shims/es-shim-api/compare/v3.0.2...v3.0.3) - 2025-10-29
+
+### Commits
+
+- [Refactor] use `pargs` package [`53f5cee`](https://github.com/es-shims/es-shim-api/commit/53f5cee1891c22b46404d5f4239d427942c31892)
+- [Dev Deps] update `@arethetypeswrong/cli`, `@ljharb/eslint-config`, `@ljharb/tsconfig`, `@types/node`, `@types/semver`, `@types/tape` [`296b072`](https://github.com/es-shims/es-shim-api/commit/296b0722c041d81eed578fe184023de2cf329b51)
+- [Deps] update `object-inspect`, `semver` [`e2c3aab`](https://github.com/es-shims/es-shim-api/commit/e2c3aabb4831b3c449c984e8c7cdacc665389662)
+
 ## [v3.0.2](https://github.com/es-shims/es-shim-api/compare/v3.0.1...v3.0.2) - 2024-12-11
 
 ### Commits
