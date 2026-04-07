@@ -172,7 +172,6 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 		st.notOk(
 			Object(module) === module && 'implementation' in module,
 			'module.exports lacks a `implementation` property',
-			{ skip: isMulti },
 		);
 
 		if (type === 'property') {
@@ -190,7 +189,6 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 		st.notOk(
 			Object(module) === module && 'getPolyfill' in module,
 			'module.exports lacks a `getPolyfill` property',
-			{ skip: isMulti },
 		);
 
 		st.equal(typeof getPolyfill, 'function', 'getPolyfill is a function');
@@ -202,7 +200,6 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 		st.notOk(
 			Object(module) === module && 'shim' in module,
 			'module.exports lacks a `shim` property',
-			{ skip: isMulti },
 		);
 
 		st.equal(typeof shim, 'function', 'shim is a function');
