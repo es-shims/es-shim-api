@@ -142,7 +142,7 @@ const doValidation = function doActualValidation(t, packageDir, name) {
 	}
 	const implementation = requireOrEvalError(`${packageDir}/implementation`);
 	const shim = requireOrEvalError(`${packageDir}/shim`);
-	// eslint-disable-next-line no-extra-parens
+
 	const getPolyfill = /** @type {Function} */ (requireOrEvalError(`${packageDir}/polyfill`));
 
 	const prefix = isMulti ? `${basename(packageDir)}: ` : '';
@@ -236,7 +236,7 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		: [nameOrFilePaths, nameOrFilePaths];
 
 	t.test('`exports` field', { skip: !('exports' in pkg) }, (st) => {
-		// eslint-disable-next-line no-extra-parens
+
 		const exps = /** @type {NonNullable<typeof pkg.exports>} */ (pkg.exports);
 		const expectedKeys = isMulti
 			? ['.', './auto', './shim', './package.json']
@@ -260,7 +260,7 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 	});
 
 	if (isMulti) {
-		// eslint-disable-next-line no-extra-parens
+
 		const subPackages = /** @type {string[]} */ (requireOrEvalError(name));
 		if (subPackages instanceof EvalError) {
 			return subPackages;
@@ -290,7 +290,7 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 		});
 
 		t.test('subpackages, `exports` field', { skip: !('exports' in pkg) }, (st) => {
-			// eslint-disable-next-line no-extra-parens
+
 			const exps = /** @type {NonNullable<typeof pkg.exports>} */ (pkg.exports);
 			subPackages.forEach((subPackage) => {
 				const subPackageLHS = [
@@ -304,7 +304,7 @@ const validateModule = function validateAPIModule(t, nameOrFilePaths) {
 				subPackageLHS.forEach((lhs) => {
 					st.ok(lhs in exps, `\`${lhs}\` is in \`exports\``);
 					if (lhs in exps) {
-						// eslint-disable-next-line no-extra-parens
+
 						const rhs = /** @type {string} */ (exps[lhs]);
 						st.equal(typeof rhs, 'string', 'right-hand side of `exports` is a string');
 						const resolved = resolve(join(packageDir, rhs));
