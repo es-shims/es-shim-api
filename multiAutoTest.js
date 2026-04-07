@@ -31,7 +31,7 @@ subPackages.forEach((subPackage) => {
 console.log(`## shims were called ${fakeShim.calls.length} times`);
 
 assert.equal(fakeShim.calls.length, subPackages.length * 2, 'shim was called twice per sub-package');
-const expectedCalls = subPackages.map(() => [undefined, []]);
+const expectedCalls = subPackages.map(() => [void undefined, []]);
 assert.deepEqual(fakeShim.calls, expectedCalls.concat(expectedCalls), 'all shims were invoked with no receiver or arguments');
 
 console.log('## all shims were invoked with no receiver or arguments');
