@@ -39,19 +39,40 @@ const {
 
 } = await pargs(import.meta.filename, {
 	allowPositionals: true,
+	description: {
+		sections: [
+			{
+				title: 'Types',
+				body: '- `method`: receiver-sensitive method (default)\n- `function`: non-receiver-sensitive function\n- `property`: non-function data property\n- `constructor`: constructor\n- `multi`: a package that contains multiple shims',
+			},
+		],
+	},
 	options: {
 		type: {
-			type: 'string',
+			type: 'enum',
+			choices: ['method', 'function', 'property', 'constructor', 'multi'],
 			default: 'method',
+			description: 'indicate which type of polyfill/shim this is (see Types below)',
 		},
-		'skip-shim-returns-polyfill': { type: 'boolean' },
-		'skip-auto-shim': { type: 'boolean' },
+		'skip-shim-returns-polyfill': {
+			type: 'boolean',
+			description: 'indicate that `shim` does not return the same value as `polyfill`, by design',
+		},
+		'skip-auto-shim': {
+			type: 'boolean',
+			description: 'skip testing that `auto` invokes `shim`',
+		},
 		'ignore-dirs': {
 			type: 'string',
 			multiple: true,
 			default: [],
+			placeholder: 'dir',
+			description: 'additional directories to ignore (repeatable)',
 		},
 	},
+	positionals: [{
+		name: 'module names', rest: true, description: 'space-separated module names to check (defaults to the current package)',
+	}],
 });
 
 await help();
@@ -91,17 +112,6 @@ if (moduleNames.length < 1) {
 	if (!isMulti && mainIsJSON) {
 		isMulti = true;
 		console.error('# automatic `--type=multi` mode enabled');
-	}
-
-	if (
-		type !== 'property'
-		&& type !== 'method'
-		&& type !== 'constructor'
-		&& type !== 'function'
-		&& type !== 'multi'
-	) {
-		console.error('`type` must be one of `method`, `function`, `property`, `constructor`, or `multi`');
-		process.exit(4);
 	}
 }
 
